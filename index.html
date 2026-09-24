@@ -2,15 +2,24 @@
 <html lang="id">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#8a001f">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1,viewport-fit=cover"
+>
+
+<meta
+  name="theme-color"
+  content="#8a001f"
+>
 
 <title>Dawaam</title>
 
 
 <!-- =========================================================
-     HANYA 2 BARIS INI YANG KAMU GANTI
+     HANYA 2 BAGIAN INI YANG PERLU KAMU ISI
      ========================================================= -->
 
 <script>
@@ -36,19 +45,26 @@ const BACKEND_URL =
 <style>
 
 :root{
+
   --maroon:#8a001f;
-  --maroon-dark:#690017;
+  --maroon-dark:#680017;
   --maroon-soft:#faedf1;
 
-  --gold:#b88942;
+  --gold:#b98b42;
 
   --white:#ffffff;
+
   --text:#302327;
-  --muted:#817277;
+  --muted:#827579;
+
   --border:#eadde1;
 
   --green:#14865a;
+  --green-soft:#eaf7f0;
+
   --red:#ad2c3d;
+
+  --bg:#f7f4f5;
 }
 
 
@@ -58,6 +74,7 @@ const BACKEND_URL =
 
 
 body{
+
   margin:0;
 
   min-height:100vh;
@@ -78,7 +95,7 @@ body{
     var(--text);
 
   padding:
-    20px 14px 50px;
+    16px 12px 40px;
 }
 
 
@@ -100,24 +117,32 @@ button{
 
 
 .app{
+
   width:100%;
-  max-width:560px;
+
+  max-width:570px;
 
   margin:auto;
 }
 
 
 .card{
+
   background:white;
 
   border-radius:28px;
 
-  padding:28px 22px;
+  padding:25px 20px;
 
   box-shadow:
     0 20px 60px
     rgba(30,0,8,.24);
 }
+
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
 
 
 .brand{
@@ -126,6 +151,7 @@ button{
 
 
 .logo{
+
   width:78px;
   height:78px;
 
@@ -133,7 +159,9 @@ button{
     0 auto 16px;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   border-radius:23px;
@@ -147,24 +175,24 @@ button{
     Georgia,
     serif;
 
-  font-size:
-    46px;
+  font-size:46px;
 }
 
 
 .brand h1{
+
   margin:0;
 
   color:
     var(--maroon);
 
-  font-size:
-    31px;
+  font-size:31px;
 }
 
 
 .brand p{
-  max-width:360px;
+
+  max-width:350px;
 
   margin:
     8px auto 24px;
@@ -172,18 +200,25 @@ button{
   color:
     var(--muted);
 
-  line-height:
-    1.55;
+  line-height:1.55;
 }
 
 
 #googleButton{
+
   display:flex;
+
   justify-content:center;
 }
 
 
+/* =========================================================
+   COMMON
+   ========================================================= */
+
+
 .status{
+
   margin-top:18px;
 
   padding:14px;
@@ -201,24 +236,26 @@ button{
 
 
 .status.success{
-  color:
-    var(--green);
 
   background:
-    #eaf7f0;
+    var(--green-soft);
+
+  color:
+    var(--green);
 }
 
 
 .status.error{
+
+  background:#fff0f2;
+
   color:
     var(--red);
-
-  background:
-    #fff0f2;
 }
 
 
 .topbar{
+
   display:flex;
 
   align-items:center;
@@ -228,11 +265,12 @@ button{
 
   gap:12px;
 
-  margin-bottom:24px;
+  margin-bottom:22px;
 }
 
 
 .user-name{
+
   margin-top:3px;
 
   color:
@@ -243,6 +281,7 @@ button{
 
 
 .logout{
+
   border:0;
 
   border-radius:999px;
@@ -260,61 +299,8 @@ button{
 }
 
 
-.step{
-  margin-bottom:24px;
-}
-
-
-.step-row{
-  display:flex;
-
-  justify-content:
-    space-between;
-
-  margin-bottom:8px;
-}
-
-
-.step-title{
-  color:
-    var(--maroon);
-
-  font-weight:800;
-}
-
-
-.step-percent{
-  color:
-    var(--muted);
-
-  font-size:13px;
-}
-
-
-.track{
-  height:8px;
-
-  border-radius:99px;
-
-  background:#eee6e8;
-
-  overflow:hidden;
-}
-
-
-.bar{
-  height:100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      var(--maroon),
-      var(--gold)
-    );
-}
-
-
 h2{
+
   margin:
     0 0 8px;
 
@@ -324,8 +310,9 @@ h2{
 
 
 .copy{
+
   margin:
-    0 0 24px;
+    0 0 22px;
 
   color:
     var(--muted);
@@ -334,138 +321,8 @@ h2{
 }
 
 
-.field{
-  margin-bottom:19px;
-}
-
-
-.field label.title{
-  display:block;
-
-  margin-bottom:8px;
-
-  font-size:14px;
-
-  font-weight:800;
-}
-
-
-input,
-select{
-  width:100%;
-
-  min-height:50px;
-
-  padding:
-    0 14px;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:14px;
-
-  background:white;
-
-  outline:none;
-}
-
-
-input:focus,
-select:focus{
-  border-color:
-    var(--maroon);
-
-  box-shadow:
-    0 0 0 3px
-    rgba(138,0,31,.08);
-}
-
-
-.gender-grid{
-  display:grid;
-
-  grid-template-columns:
-    1fr 1fr;
-
-  gap:12px;
-}
-
-
-.choice{
-  position:relative;
-}
-
-
-.choice input{
-  position:absolute;
-
-  opacity:0;
-}
-
-
-.choice span{
-  min-height:54px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:14px;
-
-  font-weight:700;
-}
-
-
-.choice input:checked + span{
-  background:
-    var(--maroon-soft);
-
-  border-color:
-    var(--maroon);
-
-  color:
-    var(--maroon);
-}
-
-
-small{
-  display:block;
-
-  margin-top:7px;
-
-  color:
-    var(--muted);
-
-  line-height:1.45;
-}
-
-
-.info{
-  padding:15px;
-
-  margin:
-    15px 0 22px;
-
-  border-radius:14px;
-
-  background:#fbf6eb;
-
-  color:#72582e;
-
-  font-size:13px;
-
-  line-height:1.5;
-}
-
-
 .primary{
+
   width:100%;
 
   min-height:52px;
@@ -486,6 +343,7 @@ small{
 
 
 .primary:disabled{
+
   opacity:.55;
 
   cursor:wait;
@@ -493,20 +351,76 @@ small{
 
 
 /* =========================================================
-   SUCCESS
+   PROFILE
    ========================================================= */
 
-.success-screen{
-  text-align:center;
+
+.field{
+  margin-bottom:19px;
 }
 
 
-.success-icon{
-  width:72px;
-  height:72px;
+.field label.title{
 
-  margin:
-    0 auto 18px;
+  display:block;
+
+  margin-bottom:8px;
+
+  font-size:14px;
+
+  font-weight:800;
+}
+
+
+input,
+select{
+
+  width:100%;
+
+  min-height:50px;
+
+  padding:
+    0 14px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:14px;
+
+  background:white;
+
+  outline:none;
+}
+
+
+.gender-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:12px;
+}
+
+
+.choice{
+  position:relative;
+}
+
+
+.choice input{
+
+  position:absolute;
+
+  opacity:0;
+}
+
+
+.choice span{
+
+  min-height:54px;
 
   display:flex;
 
@@ -514,32 +428,39 @@ small{
 
   justify-content:center;
 
-  border-radius:50%;
+  border:
+    1px solid
+    var(--border);
 
-  background:#e9f7f0;
+  border-radius:14px;
 
-  color:
-    var(--green);
-
-  font-size:35px;
+  font-weight:700;
 }
 
 
-.next-box{
-  margin:
-    22px 0;
+.choice input:checked + span{
 
-  padding:16px;
-
-  border-radius:14px;
+  border-color:
+    var(--maroon);
 
   background:
     var(--maroon-soft);
 
   color:
     var(--maroon);
+}
 
-  font-weight:800;
+
+small{
+
+  display:block;
+
+  margin-top:7px;
+
+  color:
+    var(--muted);
+
+  line-height:1.45;
 }
 
 
@@ -547,58 +468,54 @@ small{
    PROGRAM
    ========================================================= */
 
+
 .core-box{
-  margin-bottom:22px;
 
-  padding:16px;
+  padding:15px;
 
-  border:
-    1px solid #efe0c4;
+  margin-bottom:20px;
 
-  border-radius:18px;
+  border-radius:17px;
 
   background:#fbf6eb;
-}
 
-
-.core-title{
-  margin-bottom:12px;
-
-  color:#765722;
-
-  font-weight:800;
+  border:
+    1px solid #eee0c6;
 }
 
 
 .core-list{
+
   display:flex;
 
   flex-wrap:wrap;
 
   gap:7px;
+
+  margin-top:10px;
 }
 
 
 .core-pill{
-  padding:
-    8px 10px;
 
-  border:
-    1px solid #ebdec7;
+  padding:
+    7px 10px;
 
   border-radius:999px;
 
-  background:white;
+  border:
+    1px solid #eadbc0;
 
-  color:#5f4a27;
+  background:white;
 
   font-size:12px;
 }
 
 
 .category{
+
   margin:
-    26px 0 11px;
+    25px 0 10px;
 
   color:
     var(--maroon);
@@ -606,29 +523,25 @@ small{
   font-size:14px;
 
   font-weight:900;
-
-  text-transform:uppercase;
-
-  letter-spacing:.04em;
 }
 
 
 .amal-card{
-  margin-bottom:12px;
+
+  margin-bottom:11px;
 
   border:
     1px solid
     var(--border);
 
-  border-radius:18px;
+  border-radius:17px;
 
   overflow:hidden;
-
-  transition:.15s ease;
 }
 
 
 .amal-card.selected{
+
   border-color:
     var(--maroon);
 
@@ -639,6 +552,7 @@ small{
 
 
 .amal-main{
+
   display:flex;
 
   align-items:center;
@@ -650,31 +564,24 @@ small{
 
 
 .amal-main input{
+
   width:21px;
   height:21px;
 
   min-height:auto;
-
-  flex:0 0 auto;
 
   accent-color:
     var(--maroon);
 }
 
 
-.amal-info{
-  flex:1;
-}
-
-
 .amal-name{
   font-weight:800;
-
-  line-height:1.35;
 }
 
 
 .amal-meta{
+
   margin-top:4px;
 
   color:
@@ -685,6 +592,7 @@ small{
 
 
 .amal-settings{
+
   display:none;
 
   padding:
@@ -694,18 +602,13 @@ small{
 
 .amal-card.selected
 .amal-settings{
+
   display:block;
 }
 
 
-.amal-settings select{
-  min-height:42px;
-
-  font-size:14px;
-}
-
-
 .days{
+
   display:flex;
 
   gap:8px;
@@ -725,10 +628,10 @@ small{
 
 
 .day-check span{
+
   display:block;
 
-  padding:
-    9px 5px;
+  padding:9px;
 
   border:
     1px solid
@@ -743,20 +646,20 @@ small{
 
 
 .day-check input:checked + span{
-  background:
-    var(--maroon-soft);
 
   border-color:
     var(--maroon);
 
+  background:
+    var(--maroon-soft);
+
   color:
     var(--maroon);
-
-  font-weight:800;
 }
 
 
-.program-summary{
+.program-save{
+
   position:sticky;
 
   bottom:10px;
@@ -769,7 +672,7 @@ small{
     1px solid
     var(--border);
 
-  border-radius:19px;
+  border-radius:18px;
 
   background:white;
 
@@ -779,19 +682,74 @@ small{
 }
 
 
-.summary-row{
+/* =========================================================
+   TODAY DASHBOARD
+   ========================================================= */
+
+
+.today-header{
+
+  margin-bottom:22px;
+}
+
+
+.today-eyebrow{
+
+  margin-bottom:4px;
+
+  color:
+    var(--muted);
+
+  font-size:13px;
+}
+
+
+.today-title{
+
+  margin:0;
+
+  color:
+    var(--maroon);
+
+  font-size:28px;
+}
+
+
+.today-date{
+
+  margin-top:5px;
+
+  color:
+    var(--muted);
+
+  font-size:14px;
+}
+
+
+.level-box{
+
   display:flex;
+
+  align-items:center;
 
   justify-content:
     space-between;
 
   gap:12px;
 
-  margin-bottom:12px;
+  margin-bottom:16px;
+
+  padding:15px;
+
+  border-radius:18px;
+
+  background:
+    var(--maroon-soft);
 }
 
 
-.summary-count{
+.level-name{
+
   color:
     var(--maroon);
 
@@ -799,34 +757,311 @@ small{
 }
 
 
-.loading{
-  padding:28px;
+.level-points{
 
-  text-align:center;
+  margin-top:3px;
 
   color:
     var(--muted);
+
+  font-size:12px;
 }
 
 
-.result-level{
-  margin:
-    14px 0 4px;
+.level-badge{
+
+  padding:
+    8px 11px;
+
+  border-radius:999px;
+
+  background:white;
 
   color:
     var(--maroon);
 
-  font-size:28px;
+  font-size:12px;
 
-  font-weight:900;
+  font-weight:800;
 }
 
 
-.points{
+.context-box{
+
+  margin-bottom:16px;
+
+  padding:13px 15px;
+
+  border-radius:14px;
+
+  background:#fbf6eb;
+
+  color:#775c2d;
+
+  font-size:13px;
+
+  line-height:1.45;
+}
+
+
+.summary-grid{
+
+  display:grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap:10px;
+
   margin-bottom:24px;
+}
+
+
+.summary-card{
+
+  padding:16px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:17px;
+
+  background:white;
+}
+
+
+.summary-label{
 
   color:
     var(--muted);
+
+  font-size:12px;
+}
+
+
+.summary-value{
+
+  margin-top:6px;
+
+  color:
+    var(--maroon);
+
+  font-size:23px;
+
+  font-weight:900;
+}
+
+
+.section-title{
+
+  margin:
+    24px 0 10px;
+
+  color:
+    var(--maroon);
+
+  font-size:16px;
+
+  font-weight:900;
+}
+
+
+.daily-item{
+
+  margin-bottom:10px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:17px;
+
+  background:white;
+
+  overflow:hidden;
+}
+
+
+.daily-main{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:12px;
+
+  padding:15px;
+}
+
+
+.complete-button{
+
+  width:32px;
+  height:32px;
+
+  flex:
+    0 0 32px;
+
+  border:
+    2px solid
+    #d6c6cb;
+
+  border-radius:50%;
+
+  background:white;
+
+  color:white;
+
+  font-size:18px;
+
+  font-weight:900;
+}
+
+
+.daily-item.completed
+.complete-button{
+
+  border-color:
+    var(--green);
+
+  background:
+    var(--green);
+}
+
+
+.daily-info{
+  flex:1;
+}
+
+
+.daily-name{
+  font-weight:800;
+}
+
+
+.daily-target{
+
+  margin-top:4px;
+
+  color:
+    var(--muted);
+
+  font-size:12px;
+}
+
+
+.daily-status{
+
+  padding:
+    6px 9px;
+
+  border-radius:999px;
+
+  background:#f4f1f2;
+
+  color:
+    var(--muted);
+
+  font-size:11px;
+}
+
+
+.daily-item.completed
+.daily-status{
+
+  background:
+    var(--green-soft);
+
+  color:
+    var(--green);
+}
+
+
+.progress-area{
+
+  padding:
+    0 15px 14px 59px;
+}
+
+
+.progress-row{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:8px;
+}
+
+
+.progress-input{
+
+  min-height:39px;
+
+  flex:1;
+}
+
+
+.small-button{
+
+  min-height:39px;
+
+  border:0;
+
+  border-radius:10px;
+
+  padding:
+    0 12px;
+
+  background:
+    var(--maroon-soft);
+
+  color:
+    var(--maroon);
+
+  font-size:12px;
+
+  font-weight:800;
+}
+
+
+.progress-text{
+
+  margin-top:7px;
+
+  color:
+    var(--muted);
+
+  font-size:11px;
+}
+
+
+.refresh-button{
+
+  width:100%;
+
+  min-height:45px;
+
+  margin-top:15px;
+
+  border:
+    1px solid
+    var(--border);
+
+  border-radius:13px;
+
+  background:white;
+
+  color:
+    var(--maroon);
+
+  font-weight:800;
+}
+
+
+.dashboard-status{
+  margin-bottom:12px;
 }
 
 
@@ -834,14 +1069,20 @@ small{
 
   body{
     padding:
-      12px 10px 32px;
+      10px 8px 30px;
   }
 
 
   .card{
     padding:
-      24px 17px;
+      22px 16px;
   }
+
+
+  .today-title{
+    font-size:25px;
+  }
+
 }
 
 </style>
@@ -906,73 +1147,18 @@ small{
   class="card hidden"
 >
 
-  <div class="topbar">
-
-    <div>
-
-      <strong>
-        Assalamu'alaikum
-      </strong>
-
-      <div
-        id="profileUserName"
-        class="user-name"
-      ></div>
-
-    </div>
-
-
-    <button
-      class="logout"
-      type="button"
-      onclick="logoutDawaam()"
-    >
-      Keluar
-    </button>
-
-  </div>
-
-
-  <div class="step">
-
-    <div class="step-row">
-
-      <span class="step-title">
-        Profil Dawaam
-      </span>
-
-      <span class="step-percent">
-        40%
-      </span>
-
-    </div>
-
-
-    <div class="track">
-
-      <div
-        class="bar"
-        style="width:40%"
-      ></div>
-
-    </div>
-
-  </div>
-
-
   <h2>
-    Kenali perjalananmu
+    Profil Dawaam
   </h2>
 
 
   <p class="copy">
-    Data ini digunakan agar Dawaam
-    dapat menyesuaikan perjalanan ibadahmu.
+    Kenali perjalananmu agar
+    Dawaam dapat menyesuaikan program.
   </p>
 
 
   <form
-    id="profileForm"
     onsubmit="simpanProfil(event)"
   >
 
@@ -1019,14 +1205,6 @@ small{
 
       </div>
 
-
-      <small>
-        Untuk perempuan,
-        Dawaam dapat menyesuaikan
-        perjalanan pada kondisi
-        seperti haid atau nifas.
-      </small>
-
     </div>
 
 
@@ -1044,7 +1222,7 @@ small{
       >
 
         <option value="">
-          Pilih rentang usia
+          Pilih usia
         </option>
 
         <option value="UNDER_15">
@@ -1068,7 +1246,7 @@ small{
         </option>
 
         <option value="65_PLUS">
-          Di atas 65 tahun
+          65+ tahun
         </option>
 
       </select>
@@ -1083,7 +1261,6 @@ small{
         Zona waktu
       </label>
 
-
       <input
         id="timezone"
         readonly
@@ -1096,13 +1273,12 @@ small{
     <div class="field">
 
       <label class="title">
-        Kota untuk jadwal shalat
+        Kota
       </label>
-
 
       <input
         id="prayerCity"
-        placeholder="Contoh: Purwakarta"
+        placeholder="Purwakarta"
         required
       >
 
@@ -1113,9 +1289,8 @@ small{
     <div class="field">
 
       <label class="title">
-        Ritme awal yang kamu inginkan
+        Ritme
       </label>
-
 
       <select
         id="programStyle"
@@ -1151,17 +1326,9 @@ small{
     </div>
 
 
-
-    <div class="info">
-      Shalat fardhu 5 waktu
-      selalu menjadi inti Dawaam.
-    </div>
-
-
     <button
       id="saveProfileButton"
       class="primary"
-      type="submit"
     >
       Simpan & Lanjut
     </button>
@@ -1187,77 +1354,22 @@ small{
   class="card hidden"
 >
 
-  <div class="topbar">
-
-    <div>
-
-      <strong>
-        Pilih Amaliyah
-      </strong>
-
-      <div class="user-name">
-        Tidak perlu banyak.
-        Mulai sesuai kemampuan.
-      </div>
-
-    </div>
-
-
-    <button
-      class="logout"
-      onclick="logoutDawaam()"
-    >
-      Keluar
-    </button>
-
-  </div>
-
-
-  <div class="step">
-
-    <div class="step-row">
-
-      <span class="step-title">
-        Program Dawaam
-      </span>
-
-      <span class="step-percent">
-        70%
-      </span>
-
-    </div>
-
-
-    <div class="track">
-
-      <div
-        class="bar"
-        style="width:70%"
-      ></div>
-
-    </div>
-
-  </div>
-
-
   <h2>
-    Pilih yang ingin dijaga
+    Pilih Amaliyah
   </h2>
 
 
   <p class="copy">
     Lima shalat fardhu selalu masuk.
-    Amaliyah lain bebas dipilih dan
-    dapat diubah kembali nanti.
+    Pilih tambahan sesuai kemampuan.
   </p>
-
 
 
   <div class="core-box">
 
-    <div class="core-title">
+    <strong>
       ✓ Inti Dawaam
-    </div>
+    </strong>
 
     <div
       id="coreList"
@@ -1267,18 +1379,7 @@ small{
   </div>
 
 
-
-  <div
-    id="programLoading"
-    class="loading"
-  >
-    Memuat amaliyah...
-  </div>
-
-
-
   <div id="optionalList"></div>
-
 
 
   <div
@@ -1287,31 +1388,26 @@ small{
   ></div>
 
 
+  <div class="program-save">
 
-  <div class="program-summary">
-
-    <div class="summary-row">
+    <div style="
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:12px;
+    ">
 
       <span>
-        Amaliyah tambahan dipilih
+        Dipilih
       </span>
 
-      <span
+      <strong
         id="selectedCount"
-        class="summary-count"
+        style="color:#8a001f"
       >
         0
-      </span>
+      </strong>
 
     </div>
-
-
-    <small
-      style="margin:0 0 14px"
-    >
-      Semua pilihan akan divalidasi
-      terlebih dahulu sebelum disimpan.
-    </small>
 
 
     <button
@@ -1329,57 +1425,166 @@ small{
 
 
 <!-- =======================================================
-     PROGRAM SUCCESS
+     DASHBOARD HARI INI
      ======================================================= -->
 
 <section
-  id="programSuccessScreen"
-  class="card success-screen hidden"
+  id="todayScreen"
+  class="card hidden"
 >
 
-  <div class="success-icon">
-    ✓
+  <div class="topbar">
+
+    <div>
+
+      <strong>
+        Dawaam
+      </strong>
+
+      <div
+        id="todayUserName"
+        class="user-name"
+      ></div>
+
+    </div>
+
+
+    <button
+      class="logout"
+      onclick="logoutDawaam()"
+    >
+      Keluar
+    </button>
+
   </div>
 
 
-  <h2>
-    Program Dawaam siap
-  </h2>
+
+  <div class="today-header">
+
+    <div class="today-eyebrow">
+      Perjalanan hari ini
+    </div>
+
+    <h1 class="today-title">
+      Assalamu'alaikum
+    </h1>
+
+    <div
+      id="todayDate"
+      class="today-date"
+    ></div>
+
+  </div>
 
 
-  <p>
-    Program pertamamu
-    berhasil dibuat.
-  </p>
+
+  <div class="level-box">
+
+    <div>
+
+      <div
+        id="todayLevel"
+        class="level-name"
+      >
+        -
+      </div>
+
+      <div
+        id="todayPoints"
+        class="level-points"
+      >
+        -
+      </div>
+
+    </div>
+
+
+    <div class="level-badge">
+      Dawaam
+    </div>
+
+  </div>
+
 
 
   <div
-    id="finalLevel"
-    class="result-level"
-  >
-    -
+    id="contextBox"
+    class="context-box hidden"
+  ></div>
+
+
+
+  <div class="summary-grid">
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+        Shalat fardhu
+      </div>
+
+      <div
+        id="coreSummary"
+        class="summary-value"
+      >
+        0/5
+      </div>
+
+    </div>
+
+
+    <div class="summary-card">
+
+      <div class="summary-label">
+        Konsistensi hari ini
+      </div>
+
+      <div
+        id="consistencySummary"
+        class="summary-value"
+      >
+        0%
+      </div>
+
+    </div>
+
   </div>
+
 
 
   <div
-    id="finalPoints"
-    class="points"
+    id="dashboardStatus"
+    class="status dashboard-status hidden"
+  ></div>
+
+
+
+  <div class="section-title">
+    Shalat Fardhu
+  </div>
+
+
+  <div id="coreTodayList"></div>
+
+
+
+  <div
+    id="optionalTodayHeading"
+    class="section-title"
   >
-    -
+    Amaliyah Hari Ini
   </div>
 
 
-  <div class="next-box">
-    Selanjutnya:
-    Dashboard Hari Ini
-  </div>
+  <div id="optionalTodayList"></div>
+
 
 
   <button
-    class="primary"
-    onclick="bukaDashboardSementara()"
+    class="refresh-button"
+    onclick="loadToday()"
   >
-    Buka Hari Ini
+    ↻ Perbarui Hari Ini
   </button>
 
 </section>
@@ -1396,6 +1601,7 @@ small{
    STATE
    ========================================================= */
 
+
 let googleCredential =
   sessionStorage.getItem(
     'dawaam_google_credential'
@@ -1406,13 +1612,22 @@ let currentUser =
   null;
 
 
+let currentProfile =
+  null;
+
+
 let masterAmaliyah =
   [];
 
 
+let todayData =
+  null;
+
+
 /* =========================================================
-   UI
+   UI HELPERS
    ========================================================= */
+
 
 function showOnly(
   id
@@ -1422,7 +1637,7 @@ function showOnly(
     'loginScreen',
     'profileScreen',
     'programScreen',
-    'programSuccessScreen'
+    'todayScreen'
   ].forEach(
     function(screen){
 
@@ -1456,32 +1671,51 @@ function setStatus(
   type
 ){
 
-  const el =
-    document
-      .getElementById(
-        id
-      );
+  const element =
+    document.getElementById(
+      id
+    );
 
 
-  el.className =
+  element.className =
     'status';
 
 
   if(type){
 
-    el.classList.add(
-      type
-    );
+    element
+      .classList
+      .add(
+        type
+      );
   }
 
 
-  el.textContent =
+  element.textContent =
     message;
 
 
-  el.classList.remove(
-    'hidden'
-  );
+  element
+    .classList
+    .remove(
+      'hidden'
+    );
+}
+
+
+
+function hideStatus(
+  id
+){
+
+  document
+    .getElementById(
+      id
+    )
+    .classList
+    .add(
+      'hidden'
+    );
 }
 
 
@@ -1510,6 +1744,7 @@ function detectTimezone(){
 /* =========================================================
    API
    ========================================================= */
+
 
 async function apiCall(
   action,
@@ -1617,8 +1852,9 @@ async function apiCall(
 
 
 /* =========================================================
-   GOOGLE LOGIN
+   LOGIN
    ========================================================= */
+
 
 async function googleLoginSuccess(
   response
@@ -1633,13 +1869,6 @@ async function googleLoginSuccess(
     sessionStorage.setItem(
       'dawaam_google_credential',
       googleCredential
-    );
-
-
-    setStatus(
-      'loginStatus',
-      'Login berhasil. Membuka Dawaam...',
-      'success'
     );
 
 
@@ -1714,6 +1943,7 @@ function renderGoogleLogin(){
    BOOTSTRAP
    ========================================================= */
 
+
 async function bootstrapDawaam(){
 
   const data =
@@ -1725,6 +1955,10 @@ async function bootstrapDawaam(){
 
   currentUser =
     data.user;
+
+
+  currentProfile =
+    data.profile;
 
 
   if(
@@ -1756,17 +1990,13 @@ async function bootstrapDawaam(){
     '/today'
   ){
 
-    tampilkanProgramSelesai(
-      data.program
-    );
+    await loadToday();
 
     return;
   }
 
 
-  bukaProfile(
-    data
-  );
+  await loadToday();
 }
 
 
@@ -1775,6 +2005,7 @@ async function bootstrapDawaam(){
    PROFILE
    ========================================================= */
 
+
 function bukaProfile(
   data
 ){
@@ -1782,16 +2013,6 @@ function bukaProfile(
   showOnly(
     'profileScreen'
   );
-
-
-  document
-    .getElementById(
-      'profileUserName'
-    )
-    .textContent =
-      data.user.display_name ||
-      data.user.email ||
-      'Pengguna Dawaam';
 
 
   document
@@ -1806,17 +2027,12 @@ function bukaProfile(
     data.profile;
 
 
-  if(
-    !profile
-  ){
-
+  if(!profile){
     return;
   }
 
 
-  if(
-    profile.gender
-  ){
+  if(profile.gender){
 
     const radio =
       document.querySelector(
@@ -1827,9 +2043,7 @@ function bukaProfile(
 
 
     if(radio){
-
-      radio.checked =
-        true;
+      radio.checked=true;
     }
   }
 
@@ -1888,17 +2102,14 @@ async function simpanProfil(
 
 
   const button =
-    document
-      .getElementById(
-        'saveProfileButton'
-      );
+    document.getElementById(
+      'saveProfileButton'
+    );
 
 
-  button.disabled =
-    true;
+  button.disabled=true;
 
-
-  button.textContent =
+  button.textContent=
     'Menyimpan...';
 
 
@@ -1908,16 +2119,6 @@ async function simpanProfil(
       document.querySelector(
         'input[name="gender"]:checked'
       );
-
-
-    if(
-      !gender
-    ){
-
-      throw new Error(
-        'Pilih gender.'
-      );
-    }
 
 
     await apiCall(
@@ -1980,14 +2181,13 @@ async function simpanProfil(
     );
 
 
-    await bukaProgram();
+    await bootstrapDawaam();
 
 
   }catch(error){
 
     setStatus(
       'profileStatus',
-      'Gagal: ' +
       error.message,
       'error'
     );
@@ -1995,11 +2195,9 @@ async function simpanProfil(
 
   }finally{
 
-    button.disabled =
-      false;
+    button.disabled=false;
 
-
-    button.textContent =
+    button.textContent=
       'Simpan & Lanjut';
   }
 }
@@ -2007,32 +2205,15 @@ async function simpanProfil(
 
 
 /* =========================================================
-   PROGRAM LOAD
+   PROGRAM
    ========================================================= */
+
 
 async function bukaProgram(){
 
   showOnly(
     'programScreen'
   );
-
-
-  document
-    .getElementById(
-      'programLoading'
-    )
-    .classList
-    .remove(
-      'hidden'
-    );
-
-
-  document
-    .getElementById(
-      'optionalList'
-    )
-    .innerHTML =
-      '';
 
 
   try{
@@ -2051,52 +2232,71 @@ async function bukaProgram(){
 
     setStatus(
       'programStatus',
-      'Gagal memuat amaliyah: ' +
       error.message,
       'error'
     );
-
-
-  }finally{
-
-    document
-      .getElementById(
-        'programLoading'
-      )
-      .classList
-      .add(
-        'hidden'
-      );
   }
 }
 
 
 
-/* =========================================================
-   PROGRAM RENDER
-   ========================================================= */
+function allowedForCurrentProfile(
+  item
+){
+
+  const rule =
+    String(
+      item.gender_rule ||
+      'ALL'
+    ).toUpperCase();
+
+
+  if(
+    rule === 'ALL'
+  ){
+
+    return true;
+  }
+
+
+  if(
+    !currentProfile
+  ){
+
+    return false;
+  }
+
+
+  return (
+    rule ===
+    String(
+      currentProfile.gender ||
+      ''
+    ).toUpperCase()
+  );
+}
+
+
 
 function renderProgram(){
 
-  const core =
+  const visible =
     masterAmaliyah.filter(
-      function(item){
+      allowedForCurrentProfile
+    );
 
-        return (
-          item.is_core === true
-        );
-      }
+
+  const core =
+    visible.filter(
+      item =>
+        item.is_core === true
     );
 
 
   const optional =
-    masterAmaliyah.filter(
-      function(item){
-
-        return (
-          item.is_core !== true
-        );
-      }
+    visible.filter(
+      item =>
+        item.is_core !== true
     );
 
 
@@ -2106,8 +2306,7 @@ function renderProgram(){
     );
 
 
-  coreList.innerHTML =
-    '';
+  coreList.innerHTML='';
 
 
   core.forEach(
@@ -2119,11 +2318,11 @@ function renderProgram(){
         );
 
 
-      pill.className =
+      pill.className=
         'core-pill';
 
 
-      pill.textContent =
+      pill.textContent=
         item.short_name ||
         item.name;
 
@@ -2135,87 +2334,22 @@ function renderProgram(){
   );
 
 
-  const grouped =
-    {};
-
-
-  optional.forEach(
-    function(item){
-
-      const category =
-        item.category ||
-        'LAINNYA';
-
-
-      if(
-        !grouped[
-          category
-        ]
-      ){
-
-        grouped[
-          category
-        ] =
-          [];
-      }
-
-
-      grouped[
-        category
-      ].push(
-        item
-      );
-    }
-  );
-
-
   const container =
     document.getElementById(
       'optionalList'
     );
 
 
-  container.innerHTML =
-    '';
+  container.innerHTML='';
 
 
-  Object.keys(
-    grouped
-  ).forEach(
-    function(category){
-
-      const heading =
-        document.createElement(
-          'div'
-        );
-
-
-      heading.className =
-        'category';
-
-
-      heading.textContent =
-        formatCategory(
-          category
-        );
-
+  optional.forEach(
+    function(item){
 
       container.appendChild(
-        heading
-      );
-
-
-      grouped[
-        category
-      ].forEach(
-        function(item){
-
-          container.appendChild(
-            buildAmaliyahCard(
-              item
-            )
-          );
-        }
+        buildProgramCard(
+          item
+        )
       );
     }
   );
@@ -2226,21 +2360,7 @@ function renderProgram(){
 
 
 
-function formatCategory(
-  value
-){
-
-  return String(
-    value
-  ).replaceAll(
-    '_',
-    ' '
-  );
-}
-
-
-
-function buildAmaliyahCard(
+function buildProgramCard(
   item
 ){
 
@@ -2250,12 +2370,8 @@ function buildAmaliyahCard(
     );
 
 
-  card.className =
+  card.className=
     'amal-card';
-
-
-  card.dataset.id =
-    item.amaliyah_id;
 
 
   const main =
@@ -2264,35 +2380,32 @@ function buildAmaliyahCard(
     );
 
 
-  main.className =
+  main.className=
     'amal-main';
 
 
-  const checkbox =
+  const check =
     document.createElement(
       'input'
     );
 
 
-  checkbox.type =
-    'checkbox';
+  check.type='checkbox';
 
-
-  checkbox.className =
+  check.className=
     'amal-check';
 
-
-  checkbox.dataset.id =
+  check.dataset.id=
     item.amaliyah_id;
 
 
-  checkbox.addEventListener(
+  check.addEventListener(
     'change',
     function(){
 
       card.classList.toggle(
         'selected',
-        checkbox.checked
+        check.checked
       );
 
 
@@ -2301,14 +2414,10 @@ function buildAmaliyahCard(
   );
 
 
-  const info =
+  const text =
     document.createElement(
       'div'
     );
-
-
-  info.className =
-    'amal-info';
 
 
   const name =
@@ -2317,11 +2426,10 @@ function buildAmaliyahCard(
     );
 
 
-  name.className =
+  name.className=
     'amal-name';
 
-
-  name.textContent =
+  name.textContent=
     item.name;
 
 
@@ -2331,107 +2439,36 @@ function buildAmaliyahCard(
     );
 
 
-  meta.className =
+  meta.className=
     'amal-meta';
 
-
-  meta.textContent =
-    buildMetaText(
-      item
+  meta.textContent=
+    formatTarget(
+      item.default_target,
+      item.target_unit
     );
 
 
-  info.appendChild(
-    name
-  );
+  text.appendChild(name);
+
+  text.appendChild(meta);
 
 
-  info.appendChild(
-    meta
-  );
+  main.appendChild(check);
+
+  main.appendChild(text);
 
 
-  main.appendChild(
-    checkbox
-  );
+  card.appendChild(main);
 
 
-  main.appendChild(
-    info
-  );
-
-
-  card.appendChild(
-    main
-  );
-
-
-  card.appendChild(
-    buildAmaliyahSettings(
-      item
-    )
-  );
-
-
-  return card;
-}
-
-
-
-function buildMetaText(
-  item
-){
-
-  const parts =
-    [];
-
-
-  if(
-    item.default_target !== '' &&
-    item.default_target !== null &&
-    item.default_target !== undefined
-  ){
-
-    parts.push(
-      'Target awal: ' +
-      formatTarget(
-        item.default_target,
-        item.target_unit
-      )
-    );
-  }
-
-
-  if(
-    item.frequency_type
-  ){
-
-    parts.push(
-      formatCategory(
-        item.frequency_type
-      )
-    );
-  }
-
-
-  return parts.join(
-    ' · '
-  );
-}
-
-
-
-function buildAmaliyahSettings(
-  item
-){
-
-  const box =
+  const settings =
     document.createElement(
       'div'
     );
 
 
-  box.className =
+  settings.className=
     'amal-settings';
 
 
@@ -2444,7 +2481,7 @@ function buildAmaliyahSettings(
 
 
   if(
-    allowed.length > 0
+    allowed.length
   ){
 
     const select =
@@ -2453,41 +2490,23 @@ function buildAmaliyahSettings(
       );
 
 
-    select.className =
+    select.className=
       'target-select';
 
 
     allowed.forEach(
       function(option){
 
-        let value;
-
-        let unit;
-
-
-        if(
-          typeof option ===
-          'object' &&
-          option !== null
-        ){
-
-          value =
-            option.value;
-
-
-          unit =
-            option.unit ||
-            item.target_unit;
-
-        }else{
-
-          value =
-            option;
-
-
-          unit =
-            item.target_unit;
-        }
+        const obj =
+          (
+            typeof option ===
+            'object'
+          )
+            ? option
+            : {
+                value:option,
+                unit:item.target_unit
+              };
 
 
         const el =
@@ -2496,32 +2515,30 @@ function buildAmaliyahSettings(
           );
 
 
-        el.value =
-          String(
-            value
-          );
+        el.value=
+          obj.value;
 
 
-        el.dataset.unit =
-          unit || '';
+        el.dataset.unit=
+          obj.unit ||
+          item.target_unit ||
+          '';
 
 
-        el.textContent =
+        el.textContent=
           formatTarget(
-            value,
-            unit
+            obj.value,
+            obj.unit ||
+            item.target_unit
           );
 
 
         if(
-          String(value) ===
-          String(
-            item.default_target
-          )
+          String(obj.value) ===
+          String(item.default_target)
         ){
 
-          el.selected =
-            true;
+          el.selected=true;
         }
 
 
@@ -2532,7 +2549,7 @@ function buildAmaliyahSettings(
     );
 
 
-    box.appendChild(
+    settings.appendChild(
       select
     );
   }
@@ -2541,23 +2558,21 @@ function buildAmaliyahSettings(
   if(
     String(
       item.frequency_type
-    )
-      .toUpperCase()
-      ===
+    ).toUpperCase() ===
     'WEEKLY_CUSTOM'
   ){
 
-    const dayBox =
+    const days =
       document.createElement(
         'div'
       );
 
 
-    dayBox.className =
+    days.className=
       'days';
 
 
-    dayBox.innerHTML = `
+    days.innerHTML=`
 
       <label class="day-check">
 
@@ -2567,9 +2582,7 @@ function buildAmaliyahSettings(
           checked
         >
 
-        <span>
-          Senin
-        </span>
+        <span>Senin</span>
 
       </label>
 
@@ -2582,22 +2595,39 @@ function buildAmaliyahSettings(
           checked
         >
 
-        <span>
-          Kamis
-        </span>
+        <span>Kamis</span>
 
       </label>
 
     `;
 
 
-    box.appendChild(
-      dayBox
+    settings.appendChild(
+      days
     );
   }
 
 
-  return box;
+  card.appendChild(
+    settings
+  );
+
+
+  return card;
+}
+
+
+
+function updateSelectedCount(){
+
+  document
+    .getElementById(
+      'selectedCount'
+    )
+    .textContent =
+      document.querySelectorAll(
+        '.amal-check:checked'
+      ).length;
 }
 
 
@@ -2607,124 +2637,72 @@ function formatTarget(
   unit
 ){
 
+  if(
+    value === null ||
+    value === undefined ||
+    value === ''
+  ){
+
+    return '';
+  }
+
+
   const u =
     String(
       unit || ''
-    )
-      .toUpperCase();
+    ).toUpperCase();
 
 
-  if(
-    u === 'RAKAAT'
-  ){
-
-    return (
-      value +
-      ' rakaat'
-    );
+  if(u==='RAKAAT'){
+    return value+' rakaat';
   }
 
 
-  if(
-    u === 'JUZ'
-  ){
+  if(u==='JUZ'){
 
-    if(
-      Number(value) ===
-      .25
-    ){
-
+    if(Number(value)===.25){
       return '¼ juz';
     }
 
-
-    if(
-      Number(value) ===
-      .5
-    ){
-
+    if(Number(value)===.5){
       return '½ juz';
     }
 
-
-    return (
-      value +
-      ' juz'
-    );
+    return value+' juz';
   }
 
 
-  if(
-    u === 'AYAT'
-  ){
-
-    return (
-      value +
-      ' ayat'
-    );
+  if(u==='AYAT'){
+    return value+' ayat';
   }
 
 
-  if(
-    u === 'MINUTE'
-  ){
-
-    return (
-      value +
-      ' menit'
-    );
+  if(u==='MINUTE'){
+    return value+' menit';
   }
 
 
-  if(
-    u === 'IDR'
-  ){
+  if(u==='IDR'){
 
-    return (
-      'Rp ' +
-      Number(
-        value
-      ).toLocaleString(
-        'id-ID'
-      )
-    );
+    return 'Rp '+
+      Number(value)
+        .toLocaleString(
+          'id-ID'
+        );
   }
 
 
-  if(
-    u === 'EVENT'
-  ){
-
+  if(u==='EVENT'){
     return '1 kali';
   }
 
 
-  return (
-    String(value) +
+  return value+
     (
       unit
-        ? ' ' + unit
+        ? ' '+unit
         : ''
-    )
-  );
-}
-
-
-
-function updateSelectedCount(){
-
-  const count =
-    document.querySelectorAll(
-      '.amal-check:checked'
-    ).length;
-
-
-  document
-    .getElementById(
-      'selectedCount'
-    )
-    .textContent =
-      count;
+    );
 }
 
 
@@ -2740,9 +2718,7 @@ function smartValue(
     )
   ){
 
-    return Number(
-      value
-    );
+    return Number(value);
   }
 
 
@@ -2751,129 +2727,97 @@ function smartValue(
 
 
 
-/* =========================================================
-   BUILD BUNDLE
-   ========================================================= */
-
 function buildProgramBundle(){
 
-  const selected =
-    Array.from(
-      document.querySelectorAll(
-        '.amal-check:checked'
-      )
-    );
+  const items=[];
 
 
-  const items =
-    [];
+  document
+    .querySelectorAll(
+      '.amal-check:checked'
+    )
+    .forEach(
+      function(check){
 
-
-  selected.forEach(
-    function(check){
-
-      const id =
-        check.dataset.id;
-
-
-      const master =
-        masterAmaliyah.find(
-          function(item){
-
-            return (
+        const master =
+          masterAmaliyah.find(
+            item =>
               item.amaliyah_id ===
-              id
-            );
-          }
-        );
+              check.dataset.id
+          );
 
 
-      if(
-        !master
-      ){
-
-        return;
-      }
+        const card =
+          check.closest(
+            '.amal-card'
+          );
 
 
-      const card =
-        check.closest(
-          '.amal-card'
-        );
-
-
-      const payload =
-        {
+        const payload={
 
           amaliyah_id:
-            id
+            master.amaliyah_id
         };
 
 
-      const targetSelect =
-        card.querySelector(
-          '.target-select'
-        );
-
-
-      if(
-        targetSelect
-      ){
-
-        const option =
-          targetSelect.options[
-            targetSelect
-              .selectedIndex
-          ];
-
-
-        payload.target_value =
-          smartValue(
-            targetSelect.value
+        const select =
+          card.querySelector(
+            '.target-select'
           );
 
 
-        payload.target_unit =
-          option.dataset.unit ||
-          master.target_unit;
-      }
+        if(select){
+
+          const option =
+            select.options[
+              select.selectedIndex
+            ];
 
 
-      if(
-        String(
-          master.frequency_type
-        )
-          .toUpperCase()
-          ===
-        'WEEKLY_CUSTOM'
-      ){
-
-        const days =
-          Array.from(
-            card.querySelectorAll(
-              '.day-check input:checked'
-            )
-          ).map(
-            function(day){
-
-              return day.value;
-            }
-          );
+          payload.target_value=
+            smartValue(
+              select.value
+            );
 
 
-        if(
-          days.length === 0
-        ){
-
-          throw new Error(
-            master.name +
-            ': pilih minimal satu hari.'
-          );
+          payload.target_unit=
+            option.dataset.unit ||
+            master.target_unit;
         }
 
 
-        payload.frequency_rule =
-          {
+        if(
+          String(
+            master.frequency_type
+          ).toUpperCase() ===
+          'WEEKLY_CUSTOM'
+        ){
+
+          const days =
+            Array
+              .from(
+                card.querySelectorAll(
+                  '.day-check input:checked'
+                )
+              )
+              .map(
+                element =>
+                  element.value
+              );
+
+
+          if(
+            days.length===0
+          ){
+
+            throw new Error(
+              master.name+
+              ': pilih minimal satu hari.'
+            );
+          }
+
+
+          payload.frequency_rule={
 
             type:
               'WEEKLY_CUSTOM',
@@ -2881,56 +2825,43 @@ function buildProgramBundle(){
             days:
               days
           };
+        }
+
+
+        items.push(
+          payload
+        );
       }
-
-
-      items.push(
-        payload
-      );
-    }
-  );
+    );
 
 
   return {
-
-    items:
-      items
+    items:items
   };
 }
 
 
 
-/* =========================================================
-   SAVE PROGRAM BUNDLE
-   ========================================================= */
-
 async function simpanProgramBundle(){
 
   const button =
-    document
-      .getElementById(
-        'saveProgramButton'
-      );
+    document.getElementById(
+      'saveProgramButton'
+    );
 
 
-  button.disabled =
-    true;
+  button.disabled=true;
 
-
-  button.textContent =
-    'Memvalidasi program...';
+  button.textContent=
+    'Menyimpan...';
 
 
   try{
 
-    const bundle =
-      buildProgramBundle();
-
-
     const result =
       await apiCall(
         'saveProgramBundle',
-        bundle
+        buildProgramBundle()
       );
 
 
@@ -2940,21 +2871,18 @@ async function simpanProgramBundle(){
     ){
 
       throw new Error(
-        'Program tersimpan tetapi route belum /today.'
+        'Route belum /today.'
       );
     }
 
 
-    tampilkanProgramSelesai(
-      result.program
-    );
+    await loadToday();
 
 
   }catch(error){
 
     setStatus(
       'programStatus',
-      'Gagal menyimpan program: ' +
       error.message,
       'error'
     );
@@ -2962,11 +2890,9 @@ async function simpanProgramBundle(){
 
   }finally{
 
-    button.disabled =
-      false;
+    button.disabled=false;
 
-
-    button.textContent =
+    button.textContent=
       'Simpan Program Dawaam';
   }
 }
@@ -2974,65 +2900,872 @@ async function simpanProgramBundle(){
 
 
 /* =========================================================
-   PROGRAM SUCCESS
+   DASHBOARD
    ========================================================= */
 
-function tampilkanProgramSelesai(
-  program
-){
+
+async function loadToday(){
 
   showOnly(
-    'programSuccessScreen'
+    'todayScreen'
+  );
+
+
+  hideStatus(
+    'dashboardStatus'
+  );
+
+
+  try{
+
+    const data =
+      await apiCall(
+        'getToday',
+        {}
+      );
+
+
+    todayData =
+      data;
+
+
+    renderToday();
+
+
+  }catch(error){
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal memuat hari ini: '+
+      error.message,
+      'error'
+    );
+  }
+}
+
+
+
+function renderToday(){
+
+  const checklist =
+    todayData.checklist;
+
+
+  const summary =
+    todayData.summary;
+
+
+  document
+    .getElementById(
+      'todayUserName'
+    )
+    .textContent =
+      currentUser
+        ? (
+            currentUser.display_name ||
+            currentUser.email ||
+            ''
+          )
+        : '';
+
+
+  document
+    .getElementById(
+      'todayDate'
+    )
+    .textContent =
+      formatDateIndonesia(
+        checklist.date_local
+      );
+
+
+  document
+    .getElementById(
+      'todayLevel'
+    )
+    .textContent =
+      checklist.program.level_label;
+
+
+  document
+    .getElementById(
+      'todayPoints'
+    )
+    .textContent =
+      checklist.program.points +
+      ' poin program';
+
+
+  if(
+    summary.core_applicable === 0
+  ){
+
+    document
+      .getElementById(
+        'coreSummary'
+      )
+      .textContent =
+        'Disesuaikan';
+
+  }else{
+
+    document
+      .getElementById(
+        'coreSummary'
+      )
+      .textContent =
+        summary.core_completed +
+        '/' +
+        summary.core_applicable;
+  }
+
+
+  document
+    .getElementById(
+      'consistencySummary'
+    )
+    .textContent =
+      Math.round(
+        Number(
+          summary.consistency_score ||
+          0
+        )
+      ) +
+      '%';
+
+
+  renderContext(
+    checklist.context
+  );
+
+
+  renderDailyList(
+    'coreTodayList',
+    checklist.core.items
+  );
+
+
+  renderDailyList(
+    'optionalTodayList',
+    checklist.amaliyah.items
+  );
+
+
+  document
+    .getElementById(
+      'optionalTodayHeading'
+    )
+    .classList
+    .toggle(
+      'hidden',
+      checklist.amaliyah.items.length===0
+    );
+}
+
+
+
+function renderContext(
+  context
+){
+
+  const box =
+    document.getElementById(
+      'contextBox'
+    );
+
+
+  if(
+    !context ||
+    !context.active
+  ){
+
+    box.classList.add(
+      'hidden'
+    );
+
+    return;
+  }
+
+
+  box.textContent =
+    (
+      context.label ||
+      context.dominant_condition ||
+      'Kondisi Khusus'
+    )
+    +
+    (
+      context.uses_minimum
+        ? ' · Minimum Dawaam aktif'
+        : ''
+    );
+
+
+  box.classList.remove(
+    'hidden'
+  );
+}
+
+
+
+function renderDailyList(
+  containerId,
+  items
+){
+
+  const container =
+    document.getElementById(
+      containerId
+    );
+
+
+  container.innerHTML='';
+
+
+  items.forEach(
+    function(item){
+
+      container.appendChild(
+        buildDailyItem(
+          item
+        )
+      );
+    }
+  );
+}
+
+
+
+function buildDailyItem(
+  item
+){
+
+  const card =
+    document.createElement(
+      'div'
+    );
+
+
+  card.className=
+    'daily-item';
+
+
+  if(
+    item.status ===
+    'COMPLETED'
+  ){
+
+    card.classList.add(
+      'completed'
+    );
+  }
+
+
+  const main =
+    document.createElement(
+      'div'
+    );
+
+
+  main.className=
+    'daily-main';
+
+
+  const button =
+    document.createElement(
+      'button'
+    );
+
+
+  button.className=
+    'complete-button';
+
+
+  button.textContent=
+    item.status ===
+    'COMPLETED'
+      ? '✓'
+      : '';
+
+
+  button.title=
+    'Tandai selesai';
+
+
+  button.onclick=
+    function(){
+
+      tandaiSelesai(
+        item.user_amaliyah_id,
+        button
+      );
+    };
+
+
+  const info =
+    document.createElement(
+      'div'
+    );
+
+
+  info.className=
+    'daily-info';
+
+
+  const name =
+    document.createElement(
+      'div'
+    );
+
+
+  name.className=
+    'daily-name';
+
+
+  name.textContent=
+    item.name;
+
+
+  const target =
+    document.createElement(
+      'div'
+    );
+
+
+  target.className=
+    'daily-target';
+
+
+  target.textContent=
+    'Target: '+
+    formatTarget(
+      item.target.value,
+      item.target.unit
+    );
+
+
+  info.appendChild(
+    name
+  );
+
+
+  info.appendChild(
+    target
+  );
+
+
+  const status =
+    document.createElement(
+      'span'
+    );
+
+
+  status.className=
+    'daily-status';
+
+
+  status.textContent=
+    formatDailyStatus(
+      item
+    );
+
+
+  main.appendChild(
+    button
+  );
+
+
+  main.appendChild(
+    info
+  );
+
+
+  main.appendChild(
+    status
+  );
+
+
+  card.appendChild(
+    main
   );
 
 
   if(
-    !program
+    shouldShowProgressInput(
+      item
+    )
+  ){
+
+    card.appendChild(
+      buildProgressArea(
+        item
+      )
+    );
+  }
+
+
+  return card;
+}
+
+
+
+function formatDailyStatus(
+  item
+){
+
+  if(
+    item.status ===
+    'COMPLETED'
+  ){
+
+    return 'Selesai';
+  }
+
+
+  if(
+    item.status ===
+    'PARTIAL'
+  ){
+
+    return Math.round(
+      Number(
+        item.progress_ratio ||
+        0
+      ) * 100
+    ) + '%';
+  }
+
+
+  return 'Belum';
+}
+
+
+
+function shouldShowProgressInput(
+  item
+){
+
+  const value =
+    Number(
+      item.target.value
+    );
+
+
+  const unit =
+    String(
+      item.target.unit ||
+      ''
+    ).toUpperCase();
+
+
+  if(
+    !Number.isFinite(
+      value
+    )
+  ){
+
+    return false;
+  }
+
+
+  return [
+    'JUZ',
+    'AYAT',
+    'RAKAAT',
+    'MINUTE'
+  ].includes(
+    unit
+  );
+}
+
+
+
+function buildProgressArea(
+  item
+){
+
+  const wrapper =
+    document.createElement(
+      'div'
+    );
+
+
+  wrapper.className=
+    'progress-area';
+
+
+  const row =
+    document.createElement(
+      'div'
+    );
+
+
+  row.className=
+    'progress-row';
+
+
+  const input =
+    document.createElement(
+      'input'
+    );
+
+
+  input.type='number';
+
+  input.className=
+    'progress-input';
+
+  input.min='0';
+
+  input.max=
+    item.target.value;
+
+
+  input.step=
+    getProgressStep(
+      item.target.unit
+    );
+
+
+  input.value=
+    Number(
+      item.progress_value ||
+      0
+    );
+
+
+  const button =
+    document.createElement(
+      'button'
+    );
+
+
+  button.className=
+    'small-button';
+
+  button.textContent=
+    'Simpan progress';
+
+
+  button.onclick=
+    function(){
+
+      simpanProgress(
+        item,
+        input.value,
+        button
+      );
+    };
+
+
+  row.appendChild(
+    input
+  );
+
+
+  row.appendChild(
+    button
+  );
+
+
+  const text =
+    document.createElement(
+      'div'
+    );
+
+
+  text.className=
+    'progress-text';
+
+
+  text.textContent=
+    'Isi pencapaian saat ini dari target '+
+    formatTarget(
+      item.target.value,
+      item.target.unit
+    );
+
+
+  wrapper.appendChild(
+    row
+  );
+
+
+  wrapper.appendChild(
+    text
+  );
+
+
+  return wrapper;
+}
+
+
+
+function getProgressStep(
+  unit
+){
+
+  const value =
+    String(
+      unit ||
+      ''
+    ).toUpperCase();
+
+
+  if(
+    value === 'JUZ'
+  ){
+
+    return '0.01';
+  }
+
+
+  return '1';
+}
+
+
+
+/* =========================================================
+   DAILY ACTIONS
+   ========================================================= */
+
+
+async function tandaiSelesai(
+  userAmaliyahId,
+  button
+){
+
+  if(
+    button.disabled
   ){
 
     return;
   }
 
 
-  document
-    .getElementById(
-      'finalLevel'
-    )
-    .textContent =
-      (
-        program.level &&
-        program.level.label
-      )
-        ? program.level.label
-        : 'Program Dawaam';
+  button.disabled=true;
 
 
-  document
-    .getElementById(
-      'finalPoints'
-    )
-    .textContent =
-      (
-        Number(
-          program.program_points ||
-          0
-        )
-      ) +
-      ' poin program';
+  try{
+
+    const result =
+      await apiCall(
+        'updateLog',
+        {
+
+          date_local:
+            todayData
+              .checklist
+              .date_local,
+
+          user_amaliyah_id:
+            userAmaliyahId,
+
+          status:
+            'COMPLETED'
+        }
+      );
+
+
+    todayData={
+      checklist:
+        result.checklist,
+
+      summary:
+        result.summary
+    };
+
+
+    renderToday();
+
+
+  }catch(error){
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal menyimpan: '+
+      error.message,
+      'error'
+    );
+
+
+  }finally{
+
+    button.disabled=false;
+  }
+}
+
+
+
+async function simpanProgress(
+  item,
+  rawValue,
+  button
+){
+
+  const value =
+    Number(
+      rawValue
+    );
+
+
+  const target =
+    Number(
+      item.target.value
+    );
+
+
+  if(
+    !Number.isFinite(value) ||
+    value < 0
+  ){
+
+    setStatus(
+      'dashboardStatus',
+      'Nilai progress tidak valid.',
+      'error'
+    );
+
+    return;
+  }
+
+
+  button.disabled=true;
+
+
+  try{
+
+    let status =
+      'PARTIAL';
+
+
+    if(
+      value >= target
+    ){
+
+      status =
+        'COMPLETED';
+    }
+
+
+    const payload={
+
+      date_local:
+        todayData
+          .checklist
+          .date_local,
+
+      user_amaliyah_id:
+        item.user_amaliyah_id,
+
+      status:
+        status
+    };
+
+
+    if(
+      status ===
+      'PARTIAL'
+    ){
+
+      payload.progress_value=
+        value;
+    }
+
+
+    const result =
+      await apiCall(
+        'updateLog',
+        payload
+      );
+
+
+    todayData={
+
+      checklist:
+        result.checklist,
+
+      summary:
+        result.summary
+    };
+
+
+    renderToday();
+
+
+    setStatus(
+      'dashboardStatus',
+      'Progress tersimpan ✓',
+      'success'
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal menyimpan progress: '+
+      error.message,
+      'error'
+    );
+
+
+  }finally{
+
+    button.disabled=false;
+  }
 }
 
 
 
 /* =========================================================
-   NEXT
+   DATE
    ========================================================= */
 
-function bukaDashboardSementara(){
 
-  alert(
-    'Onboarding sudah selesai ✅\n\n' +
-    'Tahap berikutnya adalah Dashboard Hari Ini.'
-  );
+function formatDateIndonesia(
+  dateString
+){
+
+  try{
+
+    const parts =
+      dateString.split(
+        '-'
+      );
+
+
+    const date =
+      new Date(
+        Number(parts[0]),
+        Number(parts[1])-1,
+        Number(parts[2])
+      );
+
+
+    return new Intl
+      .DateTimeFormat(
+        'id-ID',
+        {
+
+          weekday:'long',
+
+          day:'numeric',
+
+          month:'long',
+
+          year:'numeric'
+        }
+      )
+      .format(
+        date
+      );
+
+
+  }catch(error){
+
+    return dateString;
+  }
 }
 
 
@@ -3041,6 +3774,7 @@ function bukaDashboardSementara(){
    LOGOUT
    ========================================================= */
 
+
 function logoutDawaam(){
 
   sessionStorage.removeItem(
@@ -3048,12 +3782,13 @@ function logoutDawaam(){
   );
 
 
-  googleCredential =
-    '';
+  googleCredential='';
 
+  currentUser=null;
 
-  currentUser =
-    null;
+  currentProfile=null;
+
+  todayData=null;
 
 
   if(
@@ -3082,6 +3817,7 @@ function logoutDawaam(){
 /* =========================================================
    START
    ========================================================= */
+
 
 window.onload =
   async function(){
@@ -3119,8 +3855,7 @@ window.onload =
 
       }catch(error){
 
-        googleCredential =
-          '';
+        googleCredential='';
 
 
         sessionStorage.removeItem(
