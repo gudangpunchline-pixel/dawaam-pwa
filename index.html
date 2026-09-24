@@ -5629,5 +5629,56 @@ renderToday =
   };
 
 </script>
+  <script>
+
+/* =========================================
+   FIX SAFAR UI -> TRAVEL BACKEND
+   ========================================= */
+
+const dawaamStoreConditionBeforeTravelFix =
+  storeCondition;
+
+storeCondition =
+  function(id, type) {
+
+    return dawaamStoreConditionBeforeTravelFix(
+      id,
+      type === 'TRAVEL'
+        ? 'SAFAR'
+        : type
+    );
+  };
+
+
+const dawaamFormatConditionBeforeTravelFix =
+  formatConditionName;
+
+formatConditionName =
+  function(type) {
+
+    if(type === 'TRAVEL') {
+      return 'Safar';
+    }
+
+    return dawaamFormatConditionBeforeTravelFix(
+      type
+    );
+  };
+
+
+const dawaamSetConditionBeforeTravelFix =
+  setDawaamCondition;
+
+setDawaamCondition =
+  function(type) {
+
+    return dawaamSetConditionBeforeTravelFix(
+      type === 'SAFAR'
+        ? 'TRAVEL'
+        : type
+    );
+  };
+
+</script>
 </body>
 </html>
