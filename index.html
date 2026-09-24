@@ -5680,5 +5680,35 @@ setDawaamCondition =
   };
 
 </script>
+  <script>
+
+/* FIX FINAL SAFAR -> TRAVEL */
+
+const dawaamRenderConditionSafarFix =
+  renderConditionPanel;
+
+renderConditionPanel =
+  function() {
+
+    dawaamRenderConditionSafarFix();
+
+    const safarButton =
+      document.getElementById(
+        'conditionSafar'
+      );
+
+    if (safarButton) {
+
+      safarButton.onclick =
+        function() {
+
+          return setDawaamCondition(
+            'TRAVEL'
+          );
+        };
+    }
+  };
+
+</script>
 </body>
 </html>
