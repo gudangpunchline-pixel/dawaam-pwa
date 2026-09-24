@@ -3869,7 +3869,283 @@ window.onload =
   };
 
 </script>
+<script>
 
+/* =========================================================
+   DAWAAM M9 TODAY DATA ADAPTER
+   Patch struktur checklist backend -> frontend
+   ========================================================= */
+
+
+function normalizeTodayItemDawaam(item) {
+
+  const master =
+    masterAmaliyah.find(
+      function(masterItem) {
+
+        return (
+          masterItem.amaliyah_id ===
+          item.amaliyah_id
+        );
+      }
+    ) || {};
+
+
+  const targetValue =
+    (
+      item.target &&
+      item.target.value !== undefined
+    )
+      ? item.target.value
+      : (
+          item.target_value !== undefined
+            ? item.target_value
+            : (
+                item.progress_target !== undefined
+                  ? item.progress_target
+                  : 1
+              )
+        );
+
+
+  const targetUnit =
+    (
+      item.target &&
+      item.target.unit
+    )
+      ? item.target.unit
+      : (
+          item.target_unit ||
+          master.target_unit ||
+          ''
+        );
+
+
+  return Object.assign(
+    {},
+    item,
+    {
+
+      target: {
+
+        value:
+          targetValue,
+
+        unit:
+          targetUnit
+      },
+
+      progress_value:
+        Number(
+          item.progress_value || 0
+        ),
+
+      progress_target:
+        Number(
+          item.progress_target !== undefined
+            ? item.progress_target
+            : targetValue
+        ),
+
+      progress_ratio:
+        Number(
+          item.progress_ratio || 0
+        ),
+
+      status:
+        item.status ||
+        'PENDING'
+    }
+  );
+}
+
+
+
+function normalizeTodayResponseDawaam(data) {
+
+  const checklist =
+    data.checklist;
+
+
+  const program =
+    checklist.program || {};
+
+
+  /*
+   * Normalisasi level + poin.
+   */
+  checklist.program =
+    Object.assign(
+      {},
+      program,
+      {
+
+        points:
+          Number(
+            program.points !== undefined
+              ? program.points
+              : (
+                  program.program_points ||
+                  0
+                )
+          ),
+
+        level_label:
+          program.level_label ||
+          (
+            program.level &&
+            program.level.label
+          ) ||
+          'Program Dawaam'
+      }
+    );
+
+
+  /*
+   * Normalisasi CORE.
+   */
+  checklist.core =
+    checklist.core || {
+      items: []
+    };
+
+
+  checklist.core.items =
+    (
+      checklist.core.items ||
+      []
+    ).map(
+      normalizeTodayItemDawaam
+    );
+
+
+  /*
+   * Normalisasi OPTIONAL.
+   */
+  checklist.amaliyah =
+    checklist.amaliyah || {
+      items: []
+    };
+
+
+  checklist.amaliyah.items =
+    (
+      checklist.amaliyah.items ||
+      []
+    ).map(
+      normalizeTodayItemDawaam
+    );
+
+
+  /*
+   * Normalisasi context.
+   */
+  const context =
+    checklist.context || {};
+
+
+  checklist.context =
+    Object.assign(
+      {},
+      context,
+      {
+
+        active:
+          context.active !== undefined
+            ? context.active
+            : !!context.has_condition,
+
+        label:
+          context.label ||
+          context.dominant_condition ||
+          '',
+
+        uses_minimum:
+          context.uses_minimum !== undefined
+            ? context.uses_minimum
+            : (
+                checklist.mode ===
+                'MINIMUM'
+              )
+      }
+    );
+
+
+  return data;
+}
+
+
+
+/*
+ * OVERRIDE loadToday lama.
+ *
+ * Sekarang:
+ * 1. ambil Master Amaliyah
+ * 2. ambil checklist hari ini
+ * 3. cocokkan target/unit
+ * 4. render dashboard
+ */
+async function loadToday() {
+
+  showOnly(
+    'todayScreen'
+  );
+
+
+  hideStatus(
+    'dashboardStatus'
+  );
+
+
+  try {
+
+    /*
+     * Master diperlukan untuk mengetahui
+     * unit target: RAKAAT, JUZ, EVENT, dll.
+     */
+    if (
+      !Array.isArray(
+        masterAmaliyah
+      ) ||
+      masterAmaliyah.length === 0
+    ) {
+
+      masterAmaliyah =
+        await apiCall(
+          'getMasterAmaliyah',
+          {}
+        );
+    }
+
+
+    const rawData =
+      await apiCall(
+        'getToday',
+        {}
+      );
+
+
+    todayData =
+      normalizeTodayResponseDawaam(
+        rawData
+      );
+
+
+    renderToday();
+
+
+  } catch (error) {
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal memuat hari ini: ' +
+      error.message,
+      'error'
+    );
+  }
+}
+
+</script>
 
 </body>
 </html>
