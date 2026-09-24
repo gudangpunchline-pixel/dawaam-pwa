@@ -4933,5 +4933,701 @@ renderToday =
   };
 
 </script>
+  <style>
+
+/* ============================================
+   M9.2B - KONDISI HARI INI
+   ============================================ */
+
+.dawaam-condition-box{
+  margin:0 0 18px;
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  background:#fff;
+}
+
+.dawaam-condition-title{
+  font-weight:900;
+  color:var(--maroon);
+  margin-bottom:5px;
+}
+
+.dawaam-condition-copy{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+  margin-bottom:12px;
+}
+
+.dawaam-condition-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.dawaam-condition-button{
+  min-height:43px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:#fff;
+  color:var(--text);
+  font-weight:800;
+}
+
+.dawaam-condition-button.active{
+  border-color:var(--maroon);
+  background:var(--maroon-soft);
+  color:var(--maroon);
+}
+
+.dawaam-condition-button:disabled{
+  opacity:.55;
+}
+
+.dawaam-condition-note{
+  margin-top:10px;
+  padding:10px 11px;
+  border-radius:11px;
+  background:#f7f4f5;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.45;
+}
+
+</style>
+
+
+<script>
+
+/* ============================================
+   M9.2B - KONDISI HARI INI
+   ============================================ */
+
+const DAWAAM_ACTIVE_CONDITION_KEY =
+  'dawaam_active_condition_id';
+
+const DAWAAM_ACTIVE_CONDITION_TYPE_KEY =
+  'dawaam_active_condition_type';
+
+
+function getStoredConditionId(){
+
+  return localStorage.getItem(
+    DAWAAM_ACTIVE_CONDITION_KEY
+  ) || '';
+}
+
+
+function getStoredConditionType(){
+
+  return localStorage.getItem(
+    DAWAAM_ACTIVE_CONDITION_TYPE_KEY
+  ) || '';
+}
+
+
+function storeCondition(
+  id,
+  type
+){
+
+  if(id){
+
+    localStorage.setItem(
+      DAWAAM_ACTIVE_CONDITION_KEY,
+      id
+    );
+  }
+
+
+  if(type){
+
+    localStorage.setItem(
+      DAWAAM_ACTIVE_CONDITION_TYPE_KEY,
+      type
+    );
+  }
+}
+
+
+function clearStoredCondition(){
+
+  localStorage.removeItem(
+    DAWAAM_ACTIVE_CONDITION_KEY
+  );
+
+  localStorage.removeItem(
+    DAWAAM_ACTIVE_CONDITION_TYPE_KEY
+  );
+}
+
+
+/*
+ * Mencoba membaca ID kondisi dari
+ * response checklist jika tersedia.
+ */
+function syncConditionFromChecklist(){
+
+  if(
+    !todayData ||
+    !todayData.checklist
+  ){
+    return;
+  }
+
+
+  const context =
+    todayData.checklist.context || {};
+
+
+  const condition =
+    context.condition ||
+    context.active_condition ||
+    {};
+
+
+  const id =
+    context.condition_id ||
+    context.active_condition_id ||
+    context.dominant_condition_id ||
+    condition.condition_id ||
+    '';
+
+
+  const type =
+    context.condition_type ||
+    context.dominant_condition ||
+    condition.condition_type ||
+    '';
+
+
+  if(id){
+
+    storeCondition(
+      id,
+      type
+    );
+  }
+}
+
+
+
+/*
+ * Panel Kondisi.
+ */
+function ensureConditionPanel(){
+
+  if(
+    document.getElementById(
+      'dawaamConditionBox'
+    )
+  ){
+    return;
+  }
+
+
+  const modeBox =
+    document.getElementById(
+      'dawaamModeBox'
+    );
+
+
+  if(!modeBox){
+    return;
+  }
+
+
+  const box =
+    document.createElement(
+      'div'
+    );
+
+
+  box.id =
+    'dawaamConditionBox';
+
+
+  box.className =
+    'dawaam-condition-box';
+
+
+  box.innerHTML = `
+
+    <div class="dawaam-condition-title">
+      Kondisi Hari Ini
+    </div>
+
+    <div class="dawaam-condition-copy">
+      Dawaam akan menyesuaikan perjalananmu
+      tanpa menghapus program utama.
+    </div>
+
+    <div class="dawaam-condition-buttons">
+
+      <button
+        id="conditionNormal"
+        class="dawaam-condition-button"
+        onclick="setDawaamCondition('NORMAL')"
+      >
+        Normal
+      </button>
+
+      <button
+        id="conditionBusy"
+        class="dawaam-condition-button"
+        onclick="setDawaamCondition('BUSY')"
+      >
+        🗓 Sibuk
+      </button>
+
+      <button
+        id="conditionSick"
+        class="dawaam-condition-button"
+        onclick="setDawaamCondition('SICK')"
+      >
+        🤒 Sakit
+      </button>
+
+      <button
+        id="conditionSafar"
+        class="dawaam-condition-button"
+        onclick="setDawaamCondition('SAFAR')"
+      >
+        🧳 Safar
+      </button>
+
+      <button
+        id="conditionHaid"
+        class="dawaam-condition-button hidden"
+        onclick="setDawaamCondition('HAID')"
+      >
+        Haid
+      </button>
+
+    </div>
+
+    <div
+      id="dawaamConditionNote"
+      class="dawaam-condition-note"
+    >
+      Tidak ada kondisi khusus yang aktif.
+    </div>
+
+  `;
+
+
+  modeBox.insertAdjacentElement(
+    'afterend',
+    box
+  );
+}
+
+
+
+/*
+ * Tampilkan HAID hanya untuk profil perempuan.
+ */
+function updateFemaleConditionButton(){
+
+  const button =
+    document.getElementById(
+      'conditionHaid'
+    );
+
+
+  if(!button){
+    return;
+  }
+
+
+  const gender =
+    currentProfile
+      ? String(
+          currentProfile.gender || ''
+        ).toUpperCase()
+      : '';
+
+
+  button.classList.toggle(
+    'hidden',
+    gender !== 'FEMALE'
+  );
+}
+
+
+
+/*
+ * Gambar kondisi aktif.
+ */
+function renderConditionPanel(){
+
+  ensureConditionPanel();
+
+  updateFemaleConditionButton();
+
+  syncConditionFromChecklist();
+
+
+  const type =
+    getStoredConditionType();
+
+
+  const buttons = {
+
+    NORMAL:
+      document.getElementById(
+        'conditionNormal'
+      ),
+
+    BUSY:
+      document.getElementById(
+        'conditionBusy'
+      ),
+
+    SICK:
+      document.getElementById(
+        'conditionSick'
+      ),
+
+    SAFAR:
+      document.getElementById(
+        'conditionSafar'
+      ),
+
+    HAID:
+      document.getElementById(
+        'conditionHaid'
+      )
+  };
+
+
+  Object.keys(
+    buttons
+  ).forEach(
+    function(key){
+
+      if(buttons[key]){
+
+        buttons[key]
+          .classList
+          .toggle(
+            'active',
+            (
+              type
+                ? key === type
+                : key === 'NORMAL'
+            )
+          );
+      }
+    }
+  );
+
+
+  const note =
+    document.getElementById(
+      'dawaamConditionNote'
+    );
+
+
+  if(!note){
+    return;
+  }
+
+
+  const messages = {
+
+    BUSY:
+      'Mode Sibuk aktif. Dawaam dapat menggunakan target yang lebih ringan agar ritme tetap terjaga.',
+
+    SICK:
+      'Mode Sakit aktif. Checklist disesuaikan dengan kondisi dan kemampuan hari ini.',
+
+    SAFAR:
+      'Mode Safar aktif. Dawaam menggunakan konteks perjalanan untuk menyesuaikan checklist.',
+
+    HAID:
+      'Mode Haid aktif. Ibadah yang tidak berlaku tidak dihitung sebagai kegagalan.',
+
+    NORMAL:
+      'Tidak ada kondisi khusus yang aktif.'
+  };
+
+
+  note.textContent =
+    messages[
+      type || 'NORMAL'
+    ] ||
+    messages.NORMAL;
+}
+
+
+
+/*
+ * Disable semua tombol sementara.
+ */
+function disableConditionButtons(
+  disabled
+){
+
+  [
+    'conditionNormal',
+    'conditionBusy',
+    'conditionSick',
+    'conditionSafar',
+    'conditionHaid'
+  ].forEach(
+    function(id){
+
+      const button =
+        document.getElementById(
+          id
+        );
+
+
+      if(button){
+
+        button.disabled =
+          disabled;
+      }
+    }
+  );
+}
+
+
+
+/*
+ * Cari condition_id dari response startCondition.
+ */
+function extractConditionId(
+  result
+){
+
+  if(!result){
+    return '';
+  }
+
+
+  return (
+    result.condition_id ||
+    (
+      result.condition
+        ? result.condition.condition_id
+        : ''
+    ) ||
+    (
+      result.session
+        ? result.session.condition_id
+        : ''
+    ) ||
+    ''
+  );
+}
+
+
+
+/*
+ * NORMAL / BUSY / SICK / SAFAR / HAID
+ */
+async function setDawaamCondition(
+  type
+){
+
+  disableConditionButtons(
+    true
+  );
+
+
+  try{
+
+    const activeId =
+      getStoredConditionId();
+
+
+    /*
+     * NORMAL:
+     * akhiri kondisi yang dibuat dari PWA.
+     */
+    if(
+      type === 'NORMAL'
+    ){
+
+      if(activeId){
+
+        await apiCall(
+          'endCondition',
+          {
+            condition_id:
+              activeId
+          }
+        );
+      }
+
+
+      clearStoredCondition();
+
+
+      /*
+       * Kembali ke target normal.
+       */
+      const profile =
+        await apiCall(
+          'setDailyMode',
+          {
+            mode:
+              'NORMAL'
+          }
+        );
+
+
+      if(profile){
+
+        currentProfile =
+          profile;
+      }
+
+
+      await loadToday();
+
+
+      setStatus(
+        'dashboardStatus',
+        'Kondisi kembali Normal.',
+        'success'
+      );
+
+
+      return;
+    }
+
+
+    /*
+     * Jika mengganti kondisi,
+     * tutup yang sebelumnya dahulu.
+     */
+    if(activeId){
+
+      await apiCall(
+        'endCondition',
+        {
+          condition_id:
+            activeId
+        }
+      );
+
+
+      clearStoredCondition();
+    }
+
+
+    const result =
+      await apiCall(
+        'startCondition',
+        {
+
+          condition_type:
+            type,
+
+          source:
+            'MANUAL'
+        }
+      );
+
+
+    const newId =
+      extractConditionId(
+        result
+      );
+
+
+    storeCondition(
+      newId,
+      type
+    );
+
+
+    await loadToday();
+
+
+    setStatus(
+      'dashboardStatus',
+      'Kondisi ' +
+      formatConditionName(type) +
+      ' aktif.',
+      'success'
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal mengubah kondisi: ' +
+      error.message,
+      'error'
+    );
+
+
+  }finally{
+
+    disableConditionButtons(
+      false
+    );
+
+
+    renderConditionPanel();
+  }
+}
+
+
+
+function formatConditionName(
+  type
+){
+
+  const labels = {
+
+    BUSY:
+      'Sibuk',
+
+    SICK:
+      'Sakit',
+
+    SAFAR:
+      'Safar',
+
+    HAID:
+      'Haid',
+
+    NORMAL:
+      'Normal'
+  };
+
+
+  return (
+    labels[type] ||
+    type
+  );
+}
+
+
+
+/*
+ * Setelah Dashboard dirender,
+ * tampilkan panel kondisi juga.
+ */
+const dawaamRenderTodayBeforeCondition =
+  renderToday;
+
+
+renderToday =
+  function(){
+
+    dawaamRenderTodayBeforeCondition();
+
+    renderConditionPanel();
+  };
+
+</script>
 </body>
 </html>
