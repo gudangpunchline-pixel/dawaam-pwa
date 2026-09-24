@@ -5836,5 +5836,112 @@ setDawaamCondition =
   };
 
 </script>
+  <script>
+
+/* =========================================================
+   M9.2C - ACTIVE CONDITION UI FIX
+   Bedakan kondisi aktif sekarang vs histori kondisi hari ini
+   ========================================================= */
+
+function syncConditionFromChecklist(){
+
+  if(
+    !todayData ||
+    !todayData.checklist
+  ){
+    return;
+  }
+
+
+  const context =
+    todayData.checklist.context || {};
+
+
+  /*
+   * Hanya simpan kondisi jika backend
+   * mengatakan kondisi itu MASIH AKTIF.
+   */
+  if(
+    context.active === true
+  ){
+
+    const type =
+      context.condition_type ||
+      context.dominant_condition ||
+      (
+        context.condition
+          ? context.condition.condition_type
+          : ''
+      ) ||
+      '';
+
+
+    if(type){
+
+      storeCondition(
+        '',
+        type === 'TRAVEL'
+          ? 'SAFAR'
+          : type
+      );
+    }
+
+  }else{
+
+    /*
+     * Kondisi sudah selesai.
+     * Jangan hidupkan kembali dari histori hari ini.
+     */
+    clearStoredCondition();
+  }
+}
+
+
+/*
+ * Override panel supaya status tombol
+ * mengikuti kondisi aktif sekarang.
+ */
+
+const dawaamConditionRenderFinal =
+  renderConditionPanel;
+
+
+renderConditionPanel =
+  function(){
+
+    syncConditionFromChecklist();
+
+    dawaamConditionRenderFinal();
+
+
+    const context =
+      (
+        todayData &&
+        todayData.checklist
+      )
+        ? (
+            todayData.checklist.context ||
+            {}
+          )
+        : {};
+
+
+    const note =
+      document.getElementById(
+        'dawaamConditionNote'
+      );
+
+
+    if(
+      note &&
+      context.active !== true
+    ){
+
+      note.textContent =
+        'Tidak ada kondisi khusus yang sedang aktif.';
+    }
+  };
+
+</script>
 </body>
 </html>
