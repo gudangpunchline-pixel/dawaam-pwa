@@ -4551,5 +4551,387 @@ async function loadToday() {
 }
 
 </script>
+  <style>
+
+/* =========================================================
+   M9.2A - DAILY MODE
+   ========================================================= */
+
+.dawaam-mode-box{
+  margin:0 0 18px;
+  padding:15px;
+  border:1px solid var(--border);
+  border-radius:17px;
+  background:#fff;
+}
+
+.dawaam-mode-title{
+  font-weight:900;
+  color:var(--maroon);
+  margin-bottom:5px;
+}
+
+.dawaam-mode-copy{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.45;
+  margin-bottom:12px;
+}
+
+.dawaam-mode-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.dawaam-mode-button{
+  min-height:43px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:white;
+  color:var(--text);
+  font-weight:800;
+}
+
+.dawaam-mode-button.active{
+  border-color:var(--maroon);
+  background:var(--maroon-soft);
+  color:var(--maroon);
+}
+
+.dawaam-mode-button:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+
+.dawaam-mode-note{
+  margin-top:10px;
+  padding:10px 11px;
+  border-radius:11px;
+  background:#fbf6eb;
+  color:#72582e;
+  font-size:11px;
+  line-height:1.45;
+}
+
+</style>
+
+
+<script>
+
+/* =========================================================
+   DAWAAM M9.2A
+   NORMAL / MINIMUM MODE
+   ========================================================= */
+
+
+/**
+ * Membaca mode aktif.
+ */
+function dawaamCurrentMode(){
+
+  const checklistMode =
+    todayData &&
+    todayData.checklist
+      ? todayData.checklist.mode
+      : null;
+
+
+  const profileMode =
+    currentProfile
+      ? currentProfile.current_mode
+      : null;
+
+
+  return String(
+    checklistMode ||
+    profileMode ||
+    'NORMAL'
+  )
+    .trim()
+    .toUpperCase();
+}
+
+
+
+/**
+ * Membuat panel mode hanya satu kali.
+ */
+function ensureDawaamModePanel(){
+
+  if(
+    document.getElementById(
+      'dawaamModeBox'
+    )
+  ){
+    return;
+  }
+
+
+  const levelBox =
+    document.querySelector(
+      '#todayScreen .level-box'
+    );
+
+
+  if(!levelBox){
+    return;
+  }
+
+
+  const box =
+    document.createElement(
+      'div'
+    );
+
+
+  box.id =
+    'dawaamModeBox';
+
+
+  box.className =
+    'dawaam-mode-box';
+
+
+  box.innerHTML = `
+
+    <div class="dawaam-mode-title">
+      Mode Hari Ini
+    </div>
+
+    <div class="dawaam-mode-copy">
+      Jika hari terasa berat,
+      gunakan Minimum Dawaam agar kebiasaan
+      tetap terjaga dengan target yang lebih ringan.
+    </div>
+
+    <div class="dawaam-mode-buttons">
+
+      <button
+        id="modeNormalButton"
+        class="dawaam-mode-button"
+        type="button"
+        onclick="ubahDawaamMode('NORMAL')"
+      >
+        Normal
+      </button>
+
+      <button
+        id="modeMinimumButton"
+        class="dawaam-mode-button"
+        type="button"
+        onclick="ubahDawaamMode('MINIMUM')"
+      >
+        🌱 Minimum
+      </button>
+
+    </div>
+
+    <div
+      id="dawaamModeNote"
+      class="dawaam-mode-note"
+    ></div>
+
+  `;
+
+
+  levelBox.insertAdjacentElement(
+    'afterend',
+    box
+  );
+}
+
+
+
+/**
+ * Menggambar status tombol.
+ */
+function renderDawaamMode(){
+
+  ensureDawaamModePanel();
+
+
+  const normalButton =
+    document.getElementById(
+      'modeNormalButton'
+    );
+
+
+  const minimumButton =
+    document.getElementById(
+      'modeMinimumButton'
+    );
+
+
+  const note =
+    document.getElementById(
+      'dawaamModeNote'
+    );
+
+
+  if(
+    !normalButton ||
+    !minimumButton ||
+    !note
+  ){
+    return;
+  }
+
+
+  const mode =
+    dawaamCurrentMode();
+
+
+  normalButton.classList.toggle(
+    'active',
+    mode === 'NORMAL'
+  );
+
+
+  minimumButton.classList.toggle(
+    'active',
+    mode === 'MINIMUM'
+  );
+
+
+  if(
+    mode === 'MINIMUM'
+  ){
+
+    note.textContent =
+      'Minimum Dawaam aktif. Target yang memiliki versi minimum akan dibuat lebih ringan tanpa mengubah program permanenmu.';
+
+  }else{
+
+    note.textContent =
+      'Mode Normal aktif. Target mengikuti program Dawaam yang kamu pilih.';
+  }
+}
+
+
+
+/**
+ * Mengubah mode melalui backend.
+ */
+async function ubahDawaamMode(
+  mode
+){
+
+  const normalButton =
+    document.getElementById(
+      'modeNormalButton'
+    );
+
+
+  const minimumButton =
+    document.getElementById(
+      'modeMinimumButton'
+    );
+
+
+  if(
+    normalButton
+  ){
+    normalButton.disabled = true;
+  }
+
+
+  if(
+    minimumButton
+  ){
+    minimumButton.disabled = true;
+  }
+
+
+  try{
+
+    setStatus(
+      'dashboardStatus',
+      mode === 'MINIMUM'
+        ? 'Mengaktifkan Minimum Dawaam...'
+        : 'Mengembalikan Mode Normal...'
+    );
+
+
+    const profile =
+      await apiCall(
+        'setDailyMode',
+        {
+          mode:mode
+        }
+      );
+
+
+    if(profile){
+
+      currentProfile =
+        profile;
+    }
+
+
+    /**
+     * Ambil ulang checklist.
+     * Backend yang menentukan target baru.
+     */
+    await loadToday();
+
+
+    setStatus(
+      'dashboardStatus',
+      mode === 'MINIMUM'
+        ? '🌱 Minimum Dawaam aktif.'
+        : 'Mode Normal aktif.',
+      'success'
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal mengubah mode: ' +
+      error.message,
+      'error'
+    );
+
+
+  }finally{
+
+    if(
+      normalButton
+    ){
+      normalButton.disabled = false;
+    }
+
+
+    if(
+      minimumButton
+    ){
+      minimumButton.disabled = false;
+    }
+  }
+}
+
+
+
+/**
+ * Bungkus renderer Dashboard yang sudah ada.
+ *
+ * Setelah Dashboard selesai dirender,
+ * panel mode ikut diperbarui.
+ */
+const dawaamRenderTodayBeforeMode =
+  renderToday;
+
+
+renderToday =
+  function(){
+
+    dawaamRenderTodayBeforeMode();
+
+    renderDawaamMode();
+  };
+
+</script>
 </body>
 </html>
