@@ -4146,6 +4146,410 @@ async function loadToday() {
 }
 
 </script>
+<script>
 
+/* =========================================================
+   DAWAAM DASHBOARD FIX v2
+   Membaca format checklist backend yang sebenarnya
+   ========================================================= */
+
+function dawaamTargetInfo(item) {
+
+  const master =
+    masterAmaliyah.find(function(m) {
+      return m.amaliyah_id === item.amaliyah_id;
+    }) || {};
+
+  return {
+    value:
+      item.target_value ??
+      item.progress_target ??
+      (item.target ? item.target.value : null) ??
+      1,
+
+    unit:
+      item.target_unit ||
+      master.target_unit ||
+      (item.target ? item.target.unit : '') ||
+      'EVENT'
+  };
+}
+
+
+function dawaamStatusText(item) {
+
+  if (item.status === 'COMPLETED') {
+    return 'Selesai';
+  }
+
+  if (item.status === 'PARTIAL') {
+    return Math.round(
+      Number(item.progress_ratio || 0) * 100
+    ) + '%';
+  }
+
+  return 'Belum';
+}
+
+
+function dawaamBuildItem(item) {
+
+  const target =
+    dawaamTargetInfo(item);
+
+  const card =
+    document.createElement('div');
+
+  card.className =
+    'daily-item';
+
+  if (item.status === 'COMPLETED') {
+    card.classList.add('completed');
+  }
+
+
+  const main =
+    document.createElement('div');
+
+  main.className =
+    'daily-main';
+
+
+  const button =
+    document.createElement('button');
+
+  button.className =
+    'complete-button';
+
+  button.textContent =
+    item.status === 'COMPLETED'
+      ? '✓'
+      : '';
+
+  button.onclick =
+    async function() {
+
+      button.disabled = true;
+
+      try {
+
+        const result =
+          await apiCall(
+            'updateLog',
+            {
+              date_local:
+                todayData.checklist.date_local,
+
+              user_amaliyah_id:
+                item.user_amaliyah_id,
+
+              status:
+                'COMPLETED'
+            }
+          );
+
+        todayData = {
+          checklist:
+            result.checklist,
+
+          summary:
+            result.summary
+        };
+
+        renderToday();
+
+      } catch (error) {
+
+        setStatus(
+          'dashboardStatus',
+          'Gagal menyimpan: ' +
+          error.message,
+          'error'
+        );
+
+      } finally {
+
+        button.disabled = false;
+      }
+    };
+
+
+  const info =
+    document.createElement('div');
+
+  info.className =
+    'daily-info';
+
+
+  const name =
+    document.createElement('div');
+
+  name.className =
+    'daily-name';
+
+  name.textContent =
+    item.name || item.amaliyah_id;
+
+
+  const targetText =
+    document.createElement('div');
+
+  targetText.className =
+    'daily-target';
+
+  targetText.textContent =
+    'Target: ' +
+    formatTarget(
+      target.value,
+      target.unit
+    );
+
+
+  info.appendChild(name);
+  info.appendChild(targetText);
+
+
+  const status =
+    document.createElement('span');
+
+  status.className =
+    'daily-status';
+
+  status.textContent =
+    dawaamStatusText(item);
+
+
+  main.appendChild(button);
+  main.appendChild(info);
+  main.appendChild(status);
+
+  card.appendChild(main);
+
+  return card;
+}
+
+
+function dawaamRenderList(
+  id,
+  items
+) {
+
+  const container =
+    document.getElementById(id);
+
+  container.innerHTML = '';
+
+
+  (items || []).forEach(
+    function(item) {
+
+      container.appendChild(
+        dawaamBuildItem(item)
+      );
+    }
+  );
+}
+
+
+/* OVERRIDE RENDER DASHBOARD LAMA */
+
+function renderToday() {
+
+  const checklist =
+    todayData.checklist || {};
+
+  const summary =
+    todayData.summary || {};
+
+  const program =
+    checklist.program || {};
+
+
+  document
+    .getElementById(
+      'todayUserName'
+    )
+    .textContent =
+      currentUser
+        ? (
+            currentUser.display_name ||
+            currentUser.email ||
+            ''
+          )
+        : '';
+
+
+  document
+    .getElementById(
+      'todayDate'
+    )
+    .textContent =
+      checklist.date_local
+        ? formatDateIndonesia(
+            checklist.date_local
+          )
+        : '';
+
+
+  document
+    .getElementById(
+      'todayLevel'
+    )
+    .textContent =
+      program.level_label ||
+      (
+        program.level
+          ? program.level.label
+          : ''
+      ) ||
+      program.level_code ||
+      'Program Dawaam';
+
+
+  document
+    .getElementById(
+      'todayPoints'
+    )
+    .textContent =
+      Number(
+        program.points ??
+        program.program_points ??
+        0
+      ) +
+      ' poin program';
+
+
+  if (
+    Number(
+      summary.core_applicable
+    ) === 0
+  ) {
+
+    document
+      .getElementById(
+        'coreSummary'
+      )
+      .textContent =
+        'Disesuaikan';
+
+  } else {
+
+    document
+      .getElementById(
+        'coreSummary'
+      )
+      .textContent =
+        Number(
+          summary.core_completed || 0
+        ) +
+        '/' +
+        Number(
+          summary.core_applicable || 5
+        );
+  }
+
+
+  document
+    .getElementById(
+      'consistencySummary'
+    )
+    .textContent =
+      Math.round(
+        Number(
+          summary.consistency_score || 0
+        )
+      ) +
+      '%';
+
+
+  dawaamRenderList(
+    'coreTodayList',
+    checklist.core
+      ? checklist.core.items
+      : []
+  );
+
+
+  dawaamRenderList(
+    'optionalTodayList',
+    checklist.amaliyah
+      ? checklist.amaliyah.items
+      : []
+  );
+
+
+  const optionalCount =
+    checklist.amaliyah &&
+    Array.isArray(
+      checklist.amaliyah.items
+    )
+      ? checklist.amaliyah.items.length
+      : 0;
+
+
+  document
+    .getElementById(
+      'optionalTodayHeading'
+    )
+    .classList.toggle(
+      'hidden',
+      optionalCount === 0
+    );
+}
+
+
+/* OVERRIDE LOAD TODAY */
+
+async function loadToday() {
+
+  showOnly(
+    'todayScreen'
+  );
+
+
+  hideStatus(
+    'dashboardStatus'
+  );
+
+
+  try {
+
+    if (
+      !Array.isArray(
+        masterAmaliyah
+      ) ||
+      masterAmaliyah.length === 0
+    ) {
+
+      masterAmaliyah =
+        await apiCall(
+          'getMasterAmaliyah',
+          {}
+        );
+    }
+
+
+    todayData =
+      await apiCall(
+        'getToday',
+        {}
+      );
+
+
+    renderToday();
+
+
+  } catch (error) {
+
+    setStatus(
+      'dashboardStatus',
+      'Gagal memuat hari ini: ' +
+      error.message,
+      'error'
+    );
+  }
+}
+
+</script>
 </body>
 </html>
