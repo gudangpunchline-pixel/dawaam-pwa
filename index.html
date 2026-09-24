@@ -2,2031 +2,2119 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
-  <meta
-    name="theme-color"
-    content="#7f1028"
-  >
-
-  <title>Dawaam</title>
-
-
-  <!-- =====================================================
-       CUMA 2 BAGIAN INI YANG PERLU DIISI
-       ===================================================== -->
-
-  <script>
-    const GOOGLE_CLIENT_ID =
-      '868290642922-ur59snmc9e3h7j5nb8d7p6bpthnkqgen.apps.googleusercontent.com';
-
-    const BACKEND_URL =
-      'https://script.google.com/macros/s/AKfycbwr6N8jQ-QrrElvBhLyQZdN-HSrpjWLiPhfrAGPbYv3G88eSxjk4WdUkhf9feJgwa7b/exec';
-  </script>
-
-
-  <!-- GOOGLE LOGIN -->
-  <script
-    src="https://accounts.google.com/gsi/client"
-    async
-    defer>
-  </script>
-
-
-  <style>
-
-    :root {
-      --maroon: #7f1028;
-      --maroon-dark: #630a1d;
-      --maroon-soft: #f8edf0;
-
-      --gold: #c89c52;
-
-      --white: #ffffff;
-      --bg: #f6f3f4;
-
-      --text: #291f22;
-      --muted: #7e7074;
-
-      --border: #e8dfe2;
-
-      --success: #1f7a46;
-      --danger: #a72b36;
-
-      --radius-xl: 28px;
-      --radius-lg: 20px;
-      --radius-md: 14px;
-    }
-
-
-    * {
-      box-sizing: border-box;
-    }
-
-
-    body {
-      margin: 0;
-
-      min-height: 100vh;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background:
-        linear-gradient(
-          160deg,
-          var(--maroon-dark),
-          var(--maroon)
-        );
-
-      color:
-        var(--text);
-
-      padding:
-        24px 16px 48px;
-    }
-
-
-    button,
-    input,
-    select {
-      font: inherit;
-    }
-
-
-    button {
-      cursor: pointer;
-    }
-
-
-    .app {
-      width: 100%;
-      max-width: 520px;
-
-      margin: 0 auto;
-    }
-
-
-    .hidden {
-      display: none !important;
-    }
-
-
-    /* =========================================
-       CARD
-       ========================================= */
-
-    .card {
-      background:
-        var(--white);
-
-      border-radius:
-        var(--radius-xl);
-
-      padding:
-        28px 22px;
-
-      box-shadow:
-        0 20px 60px
-        rgba(35, 4, 13, 0.24);
-    }
-
-
-    /* =========================================
-       BRAND
-       ========================================= */
-
-    .brand {
-      text-align: center;
-
-      margin-bottom:
-        26px;
-    }
-
-
-    .logo {
-      width: 80px;
-      height: 80px;
-
-      margin:
-        0 auto 16px;
-
-      border-radius:
-        24px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        var(--maroon);
-
-      color:
-        white;
-
-      font-family:
-        Georgia,
-        serif;
-
-      font-size:
-        48px;
-
-      box-shadow:
-        0 12px 28px
-        rgba(127, 16, 40, 0.24);
-    }
-
-
-    .brand h1 {
-      margin:
-        0;
-
-      color:
-        var(--maroon);
-
-      font-size:
-        32px;
-    }
-
-
-    .brand p {
-      margin:
-        8px auto 0;
-
-      max-width:
-        330px;
-
-      line-height:
-        1.55;
-
-      color:
-        var(--muted);
-    }
-
-
-    /* =========================================
-       LOGIN
-       ========================================= */
-
-    #googleButton {
-      display:
-        flex;
-
-      justify-content:
-        center;
-
-      margin:
-        26px 0 18px;
-    }
-
-
-    .status {
-      margin-top:
-        18px;
-
-      padding:
-        14px 16px;
-
-      border-radius:
-        var(--radius-md);
-
-      background:
-        #f5f2f3;
-
-      color:
-        #5f5357;
-
-      font-size:
-        14px;
-
-      text-align:
-        center;
-
-      line-height:
-        1.5;
-    }
-
-
-    .status.success {
-      background:
-        #edf8f1;
-
-      color:
-        var(--success);
-    }
-
-
-    .status.error {
-      background:
-        #fff0f1;
-
-      color:
-        var(--danger);
-    }
-
-
-    /* =========================================
-       TOP BAR
-       ========================================= */
-
-    .topbar {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        14px;
-
-      margin-bottom:
-        24px;
-    }
-
-
-    .user-name {
-      font-size:
-        13px;
-
-      color:
-        var(--muted);
-    }
-
-
-    .logout {
-      border:
-        0;
-
-      background:
-        var(--maroon-soft);
-
-      color:
-        var(--maroon);
-
-      border-radius:
-        999px;
-
-      padding:
-        9px 14px;
-
-      font-weight:
-        700;
-    }
-
-
-    /* =========================================
-       PROGRESS
-       ========================================= */
-
-    .step {
-      margin-bottom:
-        24px;
-    }
-
-
-    .step-row {
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        space-between;
-
-      gap:
-        12px;
-
-      margin-bottom:
-        9px;
-    }
-
-
-    .step-title {
-      font-weight:
-        700;
-
-      color:
-        var(--maroon);
-    }
-
-
-    .step-percent {
-      font-size:
-        13px;
-
-      color:
-        var(--muted);
-    }
-
-
-    .progress-track {
-      width:
-        100%;
-
-      height:
-        8px;
-
-      background:
-        #eee7e9;
-
-      border-radius:
-        999px;
-
-      overflow:
-        hidden;
-    }
-
-
-    .progress-bar {
-      height:
-        100%;
-
-      width:
-        40%;
-
-      border-radius:
-        inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--maroon),
-          var(--gold)
-        );
-    }
-
-
-    /* =========================================
-       FORM
-       ========================================= */
-
-    .section-heading {
-      margin:
-        0 0 6px;
-
-      color:
-        var(--maroon);
-
-      font-size:
-        25px;
-    }
-
-
-    .section-copy {
-      margin:
-        0 0 24px;
-
-      color:
-        var(--muted);
-
-      line-height:
-        1.55;
-    }
-
-
-    .field {
-      margin-bottom:
-        20px;
-    }
-
-
-    .field label {
-      display:
-        block;
-
-      margin-bottom:
-        8px;
-
-      font-size:
-        14px;
-
-      font-weight:
-        700;
-
-      color:
-        #43373b;
-    }
-
-
-    .field small {
-      display:
-        block;
-
-      margin-top:
-        7px;
-
-      color:
-        var(--muted);
-
-      line-height:
-        1.45;
-    }
-
-
-    input,
-    select {
-      width:
-        100%;
-
-      min-height:
-        50px;
-
-      padding:
-        0 14px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius-md);
-
-      background:
-        white;
-
-      color:
-        var(--text);
-
-      outline:
-        none;
-    }
-
-
-    input:focus,
-    select:focus {
-      border-color:
-        var(--maroon);
-
-      box-shadow:
-        0 0 0 3px
-        rgba(127, 16, 40, 0.08);
-    }
-
-
-    input[readonly] {
-      background:
-        #f8f6f7;
-
-      color:
-        #63575b;
-    }
-
-
-    .gender-grid {
-      display:
-        grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap:
-        12px;
-    }
-
-
-    .choice {
-      position:
-        relative;
-    }
-
-
-    .choice input {
-      position:
-        absolute;
-
-      opacity:
-        0;
-
-      pointer-events:
-        none;
-    }
-
-
-    .choice span {
-      min-height:
-        54px;
-
-      border:
-        1px solid
-        var(--border);
-
-      border-radius:
-        var(--radius-md);
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      font-weight:
-        700;
-
-      transition:
-        0.2s ease;
-    }
-
-
-    .choice input:checked + span {
-      border-color:
-        var(--maroon);
-
-      background:
-        var(--maroon-soft);
-
-      color:
-        var(--maroon);
-
-      box-shadow:
-        inset 0 0 0 1px
-        var(--maroon);
-    }
-
-
-    .info-box {
-      margin:
-        6px 0 22px;
-
-      padding:
-        15px;
-
-      border-radius:
-        var(--radius-md);
-
-      background:
-        #faf6ed;
-
-      color:
-        #6f592f;
-
-      font-size:
-        13px;
-
-      line-height:
-        1.55;
-    }
-
-
-    .primary {
-      width:
-        100%;
-
-      min-height:
-        52px;
-
-      border:
-        none;
-
-      border-radius:
-        var(--radius-md);
-
-      background:
-        var(--maroon);
-
-      color:
-        white;
-
-      font-weight:
-        800;
-
-      font-size:
-        16px;
-
-      box-shadow:
-        0 10px 24px
-        rgba(127, 16, 40, 0.2);
-    }
-
-
-    .primary:disabled {
-      opacity:
-        0.55;
-
-      cursor:
-        wait;
-    }
-
-
-    /* =========================================
-       SUCCESS
-       ========================================= */
-
-    .success-icon {
-      width:
-        72px;
-
-      height:
-        72px;
-
-      margin:
-        0 auto 18px;
-
-      border-radius:
-        50%;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      justify-content:
-        center;
-
-      background:
-        #e9f7ef;
-
-      color:
-        var(--success);
-
-      font-size:
-        34px;
-
-      font-weight:
-        800;
-    }
-
-
-    .success-screen {
-      text-align:
-        center;
-    }
-
-
-    .success-screen h2 {
-      margin:
-        0 0 10px;
-
-      color:
-        var(--maroon);
-    }
-
-
-    .success-screen p {
-      color:
-        var(--muted);
-
-      line-height:
-        1.55;
-    }
-
-
-    .next-box {
-      margin:
-        22px 0;
-
-      padding:
-        16px;
-
-      border-radius:
-        var(--radius-md);
-
-      background:
-        var(--maroon-soft);
-
-      color:
-        var(--maroon);
-
-      font-weight:
-        700;
-    }
-
-
-    /* =========================================
-       MOBILE
-       ========================================= */
-
-    @media (
-      max-width: 420px
-    ) {
-
-      body {
-        padding:
-          14px 12px 36px;
-      }
-
-
-      .card {
-        padding:
-          24px 18px;
-      }
-
-
-      .section-heading {
-        font-size:
-          22px;
-      }
-    }
-
-  </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7f1028">
+<title>Dawaam</title>
+
+<!-- ======================================================
+     HANYA 2 BARIS INI YANG PERLU DIGANTI
+     ====================================================== -->
+<script>
+const GOOGLE_CLIENT_ID = '868290642922-ur59snmc9e3h7j5nb8d7p6bpthnkqgen.apps.googleusercontent.com';
+const BACKEND_URL = 'https://script.google.com/macros/s/AKfycbwr6N8jQ-QrrElvBhLyQZdN-HSrpjWLiPhfrAGPbYv3G88eSxjk4WdUkhf9feJgwa7b/exec';
+</script>
+<!-- ====================================================== -->
+
+<script
+  src="https://accounts.google.com/gsi/client"
+  async
+  defer>
+</script>
+
+<style>
+:root{
+  --maroon:#8a001f;
+  --maroon-dark:#690017;
+  --maroon-soft:#faedf1;
+  --gold:#b98942;
+  --white:#fff;
+  --bg:#f8f5f6;
+  --text:#302327;
+  --muted:#817277;
+  --border:#eadde1;
+  --green:#118656;
+  --red:#a42c3b;
+}
+
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Arial,Helvetica,sans-serif;
+  background:linear-gradient(160deg,var(--maroon-dark),var(--maroon));
+  color:var(--text);
+  padding:22px 14px 50px;
+}
+
+button,input,select{font:inherit}
+
+button{cursor:pointer}
+
+.hidden{display:none!important}
+
+.app{
+  width:100%;
+  max-width:560px;
+  margin:auto;
+}
+
+.card{
+  background:white;
+  border-radius:28px;
+  padding:28px 22px;
+  box-shadow:0 20px 60px rgba(30,0,8,.24);
+}
+
+.brand{text-align:center}
+
+.logo{
+  width:78px;
+  height:78px;
+  margin:0 auto 16px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:23px;
+  background:var(--maroon);
+  color:white;
+  font-family:Georgia,serif;
+  font-size:46px;
+}
+
+.brand h1{
+  margin:0;
+  color:var(--maroon);
+  font-size:31px;
+}
+
+.brand p{
+  color:var(--muted);
+  line-height:1.55;
+  max-width:360px;
+  margin:8px auto 24px;
+}
+
+#googleButton{
+  display:flex;
+  justify-content:center;
+}
+
+.status{
+  margin-top:18px;
+  background:#f5f2f3;
+  padding:14px;
+  border-radius:14px;
+  text-align:center;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.status.success{
+  color:var(--green);
+  background:#eaf7f0;
+}
+
+.status.error{
+  color:var(--red);
+  background:#fff0f2;
+}
+
+.topbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.user-name{
+  font-size:13px;
+  color:var(--muted);
+  margin-top:3px;
+}
+
+.logout{
+  border:0;
+  border-radius:999px;
+  padding:9px 14px;
+  background:var(--maroon-soft);
+  color:var(--maroon);
+  font-weight:700;
+}
+
+.step{margin-bottom:24px}
+
+.step-row{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:8px;
+}
+
+.step-title{
+  color:var(--maroon);
+  font-weight:800;
+}
+
+.step-percent{
+  color:var(--muted);
+  font-size:13px;
+}
+
+.track{
+  height:8px;
+  border-radius:99px;
+  background:#eee6e8;
+  overflow:hidden;
+}
+
+.bar{
+  height:100%;
+  background:linear-gradient(90deg,var(--maroon),var(--gold));
+}
+
+h2{
+  color:var(--maroon);
+  margin:0 0 8px;
+}
+
+.copy{
+  color:var(--muted);
+  line-height:1.55;
+  margin:0 0 24px;
+}
+
+.field{margin-bottom:19px}
+
+.field label.title{
+  display:block;
+  font-weight:800;
+  font-size:14px;
+  margin-bottom:8px;
+}
+
+input,
+select{
+  width:100%;
+  min-height:50px;
+  padding:0 14px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:white;
+  outline:none;
+}
+
+input:focus,
+select:focus{
+  border-color:var(--maroon);
+  box-shadow:0 0 0 3px rgba(138,0,31,.08);
+}
+
+.gender-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.choice{
+  position:relative;
+}
+
+.choice input{
+  position:absolute;
+  opacity:0;
+}
+
+.choice span{
+  min-height:54px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--border);
+  border-radius:14px;
+  font-weight:700;
+}
+
+.choice input:checked + span{
+  background:var(--maroon-soft);
+  border-color:var(--maroon);
+  color:var(--maroon);
+}
+
+small{
+  display:block;
+  color:var(--muted);
+  line-height:1.45;
+  margin-top:7px;
+}
+
+.info{
+  padding:15px;
+  margin:15px 0 22px;
+  background:#fbf6eb;
+  border-radius:14px;
+  color:#72582e;
+  line-height:1.5;
+  font-size:13px;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  min-height:52px;
+  border-radius:14px;
+  background:var(--maroon);
+  color:white;
+  font-size:16px;
+  font-weight:800;
+}
+
+.primary:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+
+.success-screen{text-align:center}
+
+.success-icon{
+  width:72px;
+  height:72px;
+  margin:0 auto 18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#e9f7f0;
+  color:var(--green);
+  font-size:35px;
+}
+
+.next-box{
+  margin:22px 0;
+  background:var(--maroon-soft);
+  color:var(--maroon);
+  padding:16px;
+  border-radius:14px;
+  font-weight:800;
+}
+
+/* PROGRAM */
+
+.core-box{
+  background:#fbf6eb;
+  border:1px solid #efe0c4;
+  padding:16px;
+  border-radius:18px;
+  margin-bottom:22px;
+}
+
+.core-title{
+  font-weight:800;
+  color:#765722;
+  margin-bottom:12px;
+}
+
+.core-list{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.core-pill{
+  padding:8px 10px;
+  border-radius:999px;
+  background:white;
+  color:#5f4a27;
+  font-size:12px;
+  border:1px solid #ebdec7;
+}
+
+.category{
+  margin:26px 0 11px;
+  color:var(--maroon);
+  font-size:14px;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.amal-card{
+  border:1px solid var(--border);
+  border-radius:18px;
+  margin-bottom:12px;
+  overflow:hidden;
+  transition:.15s ease;
+}
+
+.amal-card.selected{
+  border-color:var(--maroon);
+  box-shadow:0 0 0 1px var(--maroon);
+}
+
+.amal-main{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:15px;
+}
+
+.amal-main input{
+  width:21px;
+  min-height:auto;
+  height:21px;
+  accent-color:var(--maroon);
+  flex:0 0 auto;
+}
+
+.amal-info{
+  flex:1;
+}
+
+.amal-name{
+  font-weight:800;
+  line-height:1.35;
+}
+
+.amal-meta{
+  margin-top:4px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+.amal-settings{
+  display:none;
+  padding:0 15px 15px 48px;
+}
+
+.amal-card.selected .amal-settings{
+  display:block;
+}
+
+.amal-settings select{
+  min-height:42px;
+  font-size:14px;
+}
+
+.days{
+  display:flex;
+  gap:8px;
+  margin-top:9px;
+}
+
+.day-check{
+  flex:1;
+}
+
+.day-check input{
+  display:none;
+}
+
+.day-check span{
+  display:block;
+  text-align:center;
+  padding:9px 5px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  font-size:12px;
+}
+
+.day-check input:checked + span{
+  background:var(--maroon-soft);
+  color:var(--maroon);
+  border-color:var(--maroon);
+  font-weight:800;
+}
+
+.program-summary{
+  position:sticky;
+  bottom:10px;
+  margin-top:25px;
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:19px;
+  box-shadow:0 10px 35px rgba(0,0,0,.12);
+  padding:15px;
+}
+
+.summary-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:12px;
+}
+
+.summary-count{
+  color:var(--maroon);
+  font-weight:900;
+}
+
+.loading{
+  padding:28px;
+  text-align:center;
+  color:var(--muted);
+}
+
+.result-level{
+  font-size:28px;
+  color:var(--maroon);
+  font-weight:900;
+  margin:14px 0 4px;
+}
+
+.points{
+  color:var(--muted);
+  margin-bottom:24px;
+}
+
+@media(max-width:420px){
+  body{padding:12px 10px 32px}
+  .card{padding:24px 17px}
+}
+</style>
 </head>
-
 
 <body>
 
-  <main class="app">
+<main class="app">
+
+<!-- LOGIN -->
+<section id="loginScreen" class="card">
+  <div class="brand">
+    <div class="logo">د</div>
+    <h1>Dawaam</h1>
+    <p>Bangun kebiasaan ibadah secara bertahap, ringan dan konsisten.</p>
+  </div>
+
+  <div id="googleButton"></div>
+  <div id="loginStatus" class="status">Memuat Google Login...</div>
+</section>
 
 
-    <!-- =====================================
-         LOGIN SCREEN
-         ===================================== -->
+<!-- PROFILE -->
+<section id="profileScreen" class="card hidden">
 
-    <section
-      id="loginScreen"
-      class="card"
-    >
+  <div class="topbar">
+    <div>
+      <strong>Assalamu'alaikum</strong>
+      <div id="profileUserName" class="user-name"></div>
+    </div>
 
-      <div class="brand">
+    <button class="logout" onclick="logoutDawaam()">Keluar</button>
+  </div>
 
-        <div class="logo">
-          د
-        </div>
+  <div class="step">
+    <div class="step-row">
+      <span class="step-title">Profil Dawaam</span>
+      <span class="step-percent">40%</span>
+    </div>
 
-        <h1>
-          Dawaam
-        </h1>
+    <div class="track">
+      <div class="bar" style="width:40%"></div>
+    </div>
+  </div>
 
-        <p>
-          Bangun kebiasaan ibadah
-          secara bertahap,
-          ringan dan konsisten.
-        </p>
+  <h2>Kenali perjalananmu</h2>
+
+  <p class="copy">
+    Data ini digunakan agar Dawaam dapat menyesuaikan perjalanan ibadahmu.
+  </p>
+
+  <form id="profileForm" onsubmit="simpanProfil(event)">
+
+    <div class="field">
+      <label class="title">Gender</label>
+
+      <div class="gender-grid">
+
+        <label class="choice">
+          <input type="radio" name="gender" value="MALE" required>
+          <span>Laki-laki</span>
+        </label>
+
+        <label class="choice">
+          <input type="radio" name="gender" value="FEMALE" required>
+          <span>Perempuan</span>
+        </label>
 
       </div>
 
+      <small>
+        Untuk perempuan, Dawaam dapat menyesuaikan perjalanan ibadah pada kondisi seperti haid atau nifas.
+      </small>
+    </div>
 
-      <div id="googleButton"></div>
+
+    <div class="field">
+      <label class="title">Rentang usia</label>
+
+      <select id="ageBand" required>
+        <option value="">Pilih rentang usia</option>
+        <option value="UNDER_15">Di bawah 15 tahun</option>
+        <option value="15_20">15–20 tahun</option>
+        <option value="21_35">21–35 tahun</option>
+        <option value="36_50">36–50 tahun</option>
+        <option value="51_65">51–65 tahun</option>
+        <option value="65_PLUS">Di atas 65 tahun</option>
+      </select>
+    </div>
 
 
-      <div
-        id="loginStatus"
-        class="status"
+    <div class="field">
+      <label class="title">Zona waktu</label>
+      <input id="timezone" readonly>
+    </div>
+
+
+    <div class="field">
+      <label class="title">Kota untuk jadwal shalat</label>
+      <input
+        id="prayerCity"
+        placeholder="Contoh: Purwakarta"
+        required
       >
-        Memuat Google Login...
-      </div>
-
-    </section>
+    </div>
 
 
+    <div class="field">
+      <label class="title">Ritme awal yang kamu inginkan</label>
 
-    <!-- =====================================
-         PROFILE SCREEN
-         ===================================== -->
-
-    <section
-      id="profileScreen"
-      class="card hidden"
-    >
-
-      <div class="topbar">
-
-        <div>
-
-          <strong>
-            Assalamu'alaikum
-          </strong>
-
-          <div
-            id="profileUserName"
-            class="user-name"
-          ></div>
-
-        </div>
+      <select id="programStyle" required>
+        <option value="">Pilih ritme</option>
+        <option value="LIGHT">Ringan — mulai sedikit dulu</option>
+        <option value="MEDIUM">Sedang — seimbang</option>
+        <option value="ACTIVE">Aktif — siap lebih banyak</option>
+        <option value="INTENSIVE">Intensif — target lebih tinggi</option>
+        <option value="CUSTOM">Custom — saya pilih sendiri</option>
+      </select>
+    </div>
 
 
-        <button
-          type="button"
-          class="logout"
-          onclick="logoutDawaam()"
-        >
-          Keluar
-        </button>
-
-      </div>
+    <div class="info">
+      Shalat fardhu 5 waktu selalu menjadi inti Dawaam.
+    </div>
 
 
-      <div class="step">
+    <button id="saveProfileButton" class="primary" type="submit">
+      Simpan & Lanjut
+    </button>
 
-        <div class="step-row">
+    <div id="profileStatus" class="status hidden"></div>
 
-          <span class="step-title">
-            Profil Dawaam
-          </span>
-
-          <span class="step-percent">
-            40%
-          </span>
-
-        </div>
+  </form>
+</section>
 
 
-        <div class="progress-track">
+<!-- PROFILE SUCCESS -->
+<section id="profileSuccessScreen" class="card success-screen hidden">
 
-          <div
-            class="progress-bar"
-            style="width:40%"
-          ></div>
+  <div class="success-icon">✓</div>
 
-        </div>
+  <h2>Profil berhasil disimpan</h2>
 
-      </div>
+  <p class="copy">
+    Dawaam sudah mengenali preferensi dasar perjalananmu.
+  </p>
 
+  <div class="next-box">
+    Tahap berikutnya: Pilih Amaliyah Dawaam
+  </div>
 
-      <h2 class="section-heading">
-        Kenali perjalananmu
-      </h2>
+  <button class="primary" onclick="bukaProgram()">
+    Lanjut Pilih Amaliyah
+  </button>
 
-
-      <p class="section-copy">
-        Data ini digunakan agar
-        checklist dan perjalanan Dawaam
-        dapat menyesuaikan kebutuhanmu.
-      </p>
+</section>
 
 
-      <form
-        id="profileForm"
-        onsubmit="simpanProfil(event)"
+<!-- PROGRAM -->
+<section id="programScreen" class="card hidden">
+
+  <div class="topbar">
+    <div>
+      <strong>Pilih Amaliyah</strong>
+      <div class="user-name">Bangun secara bertahap, tidak perlu sekaligus.</div>
+    </div>
+
+    <button class="logout" onclick="logoutDawaam()">Keluar</button>
+  </div>
+
+
+  <div class="step">
+    <div class="step-row">
+      <span class="step-title">Program Dawaam</span>
+      <span class="step-percent">70%</span>
+    </div>
+
+    <div class="track">
+      <div class="bar" style="width:70%"></div>
+    </div>
+  </div>
+
+
+  <h2>Pilih yang ingin dijaga</h2>
+
+  <p class="copy">
+    Lima shalat fardhu selalu masuk. Pilih amaliyah tambahan sesuai kemampuanmu.
+    Program dapat diubah kembali nanti.
+  </p>
+
+
+  <div class="core-box">
+
+    <div class="core-title">
+      ✓ Inti Dawaam — wajib masuk
+    </div>
+
+    <div id="coreList" class="core-list"></div>
+
+  </div>
+
+
+  <div id="programLoading" class="loading">
+    Memuat daftar amaliyah...
+  </div>
+
+
+  <div id="optionalList"></div>
+
+
+  <div id="programStatus" class="status hidden"></div>
+
+
+  <div class="program-summary">
+
+    <div class="summary-row">
+
+      <span>Amaliyah tambahan dipilih</span>
+
+      <span
+        id="selectedCount"
+        class="summary-count"
       >
-
-
-        <!-- GENDER -->
-
-        <div class="field">
-
-          <label>
-            Gender
-          </label>
-
-
-          <div class="gender-grid">
-
-            <label class="choice">
-
-              <input
-                type="radio"
-                name="gender"
-                value="MALE"
-                required
-              >
-
-              <span>
-                Laki-laki
-              </span>
-
-            </label>
-
-
-            <label class="choice">
-
-              <input
-                type="radio"
-                name="gender"
-                value="FEMALE"
-                required
-              >
-
-              <span>
-                Perempuan
-              </span>
-
-            </label>
-
-          </div>
-
-
-          <small>
-            Untuk perempuan,
-            Dawaam dapat menyesuaikan
-            perjalanan ibadah pada
-            kondisi seperti haid atau nifas.
-          </small>
-
-        </div>
-
-
-
-        <!-- AGE -->
-
-        <div class="field">
-
-          <label for="ageBand">
-            Rentang usia
-          </label>
-
-
-          <select
-            id="ageBand"
-            required
-          >
-
-            <option value="">
-              Pilih rentang usia
-            </option>
-
-            <option value="UNDER_15">
-              Di bawah 15 tahun
-            </option>
-
-            <option value="15_20">
-              15–20 tahun
-            </option>
-
-            <option value="21_35">
-              21–35 tahun
-            </option>
-
-            <option value="36_50">
-              36–50 tahun
-            </option>
-
-            <option value="51_65">
-              51–65 tahun
-            </option>
-
-            <option value="65_PLUS">
-              Di atas 65 tahun
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <!-- TIMEZONE -->
-
-        <div class="field">
-
-          <label for="timezone">
-            Zona waktu
-          </label>
-
-
-          <input
-            id="timezone"
-            type="text"
-            readonly
-          >
-
-
-          <small>
-            Dawaam mendeteksi zona waktu
-            dari perangkat secara otomatis.
-          </small>
-
-        </div>
-
-
-
-        <!-- PRAYER CITY -->
-
-        <div class="field">
-
-          <label for="prayerCity">
-            Kota untuk jadwal shalat
-          </label>
-
-
-          <input
-            id="prayerCity"
-            type="text"
-            placeholder="Contoh: Purwakarta"
-            maxlength="120"
-            required
-          >
-
-
-          <small>
-            Untuk sementara cukup isi
-            nama kota. Lokasi otomatis
-            dapat kita tambahkan kemudian.
-          </small>
-
-        </div>
-
-
-
-        <!-- PROGRAM STYLE -->
-
-        <div class="field">
-
-          <label for="programStyle">
-            Ritme awal yang kamu inginkan
-          </label>
-
-
-          <select
-            id="programStyle"
-            required
-          >
-
-            <option value="">
-              Pilih ritme
-            </option>
-
-            <option value="LIGHT">
-              Ringan — mulai sedikit dulu
-            </option>
-
-            <option value="MEDIUM">
-              Sedang — seimbang
-            </option>
-
-            <option value="ACTIVE">
-              Aktif — siap lebih banyak
-            </option>
-
-            <option value="INTENSIVE">
-              Intensif — target lebih tinggi
-            </option>
-
-            <option value="CUSTOM">
-              Custom — saya pilih sendiri
-            </option>
-
-          </select>
-
-        </div>
-
-
-
-        <div class="info-box">
-          Shalat fardhu 5 waktu tetap menjadi
-          bagian inti Dawaam.
-          Amaliyah sunnah lainnya
-          dapat dipilih pada tahap berikutnya.
-        </div>
-
-
-
-        <button
-          id="saveProfileButton"
-          class="primary"
-          type="submit"
-        >
-          Simpan & Lanjut
-        </button>
-
-
-        <div
-          id="profileStatus"
-          class="status hidden"
-        ></div>
-
-      </form>
-
-    </section>
-
-
-
-    <!-- =====================================
-         PROFILE SUCCESS
-         ===================================== -->
-
-    <section
-      id="profileSuccessScreen"
-      class="card success-screen hidden"
+        0
+      </span>
+
+    </div>
+
+    <small style="margin:0 0 14px">
+      Level Dawaam akan dihitung otomatis oleh backend setelah program disimpan.
+    </small>
+
+    <button
+      id="saveProgramButton"
+      class="primary"
+      onclick="simpanProgram()"
     >
+      Simpan Program Dawaam
+    </button>
 
-      <div class="success-icon">
-        ✓
-      </div>
+  </div>
 
+</section>
 
-      <h2>
-        Profil berhasil disimpan
-      </h2>
 
+<!-- PROGRAM SUCCESS -->
+<section id="programSuccessScreen" class="card success-screen hidden">
 
-      <p>
-        Dawaam sudah mengenali
-        preferensi dasar perjalananmu.
-      </p>
+  <div class="success-icon">✓</div>
 
+  <h2>Program Dawaam siap</h2>
 
-      <div class="next-box">
-        Tahap berikutnya:
-        Pilih Amaliyah Dawaam
-      </div>
+  <p>
+    Program pertamamu berhasil dibuat.
+  </p>
 
+  <div
+    id="finalLevel"
+    class="result-level"
+  >
+    -
+  </div>
 
-      <p>
-        Route backend:
-        <strong id="nextRoute">
-          /onboarding/program
-        </strong>
-      </p>
+  <div
+    id="finalPoints"
+    class="points"
+  >
+    -
+  </div>
 
+  <div class="next-box">
+    Selanjutnya: Dashboard Hari Ini
+  </div>
 
-      <button
-        class="primary"
-        type="button"
-        onclick="lanjutProgram()"
-      >
-        Lanjut Pilih Amaliyah
-      </button>
+  <button
+    class="primary"
+    onclick="bukaDashboardPlaceholder()"
+  >
+    Buka Hari Ini
+  </button>
 
-    </section>
+</section>
 
+</main>
 
-  </main>
 
+<script>
 
+let googleCredential =
+  sessionStorage.getItem('dawaam_google_credential') || '';
 
-  <script>
+let currentUser = null;
 
-    /* ========================================================
-       STATE
-       ======================================================== */
+let masterAmaliyah = [];
 
-    let googleCredential =
-      sessionStorage.getItem(
-        'dawaam_google_credential'
-      ) || '';
 
+/* =========================
+   UI
+   ========================= */
 
-    let currentUser =
-      null;
+function showOnly(id){
 
+  [
+    'loginScreen',
+    'profileScreen',
+    'profileSuccessScreen',
+    'programScreen',
+    'programSuccessScreen'
+  ].forEach(function(screen){
 
+    document
+      .getElementById(screen)
+      .classList.add('hidden');
 
-    /* ========================================================
-       UI HELPERS
-       ======================================================== */
+  });
 
-    function showOnly(
-      screenId
-    ) {
+  document
+    .getElementById(id)
+    .classList.remove('hidden');
+}
 
-      [
-        'loginScreen',
-        'profileScreen',
-        'profileSuccessScreen'
-      ].forEach(
-        function(id) {
 
-          document
-            .getElementById(id)
-            .classList.add(
-              'hidden'
-            );
-        }
-      );
+function setStatus(id,message,type){
 
+  const el =
+    document.getElementById(id);
 
-      document
-        .getElementById(
-          screenId
-        )
-        .classList.remove(
-          'hidden'
-        );
-    }
+  el.className='status';
 
+  if(type){
+    el.classList.add(type);
+  }
 
+  el.textContent=message;
 
-    function setStatus(
-      id,
-      message,
-      type
-    ) {
+  el.classList.remove('hidden');
+}
 
-      const element =
-        document.getElementById(
-          id
-        );
 
+function detectTimezone(){
 
-      element.className =
-        'status';
+  try{
 
+    return Intl
+      .DateTimeFormat()
+      .resolvedOptions()
+      .timeZone || 'Asia/Jakarta';
 
-      if (
-        type === 'success'
-      ) {
+  }catch(e){
 
-        element.classList.add(
-          'success'
-        );
-      }
+    return 'Asia/Jakarta';
+  }
+}
 
 
-      if (
-        type === 'error'
-      ) {
+/* =========================
+   API
+   ========================= */
 
-        element.classList.add(
-          'error'
-        );
-      }
+async function apiCall(action,payload){
 
+  if(!googleCredential){
 
-      element.textContent =
-        message;
+    throw new Error(
+      'Sesi Google habis. Silakan login kembali.'
+    );
+  }
 
 
-      element.classList.remove(
-        'hidden'
-      );
-    }
+  const response =
+    await fetch(
+      BACKEND_URL,
+      {
+        method:'POST',
 
+        headers:{
+          'Content-Type':
+            'text/plain;charset=utf-8'
+        },
 
+        body:JSON.stringify({
+          action:action,
 
-    function detectTimezone() {
-
-      try {
-
-        return (
-          Intl
-            .DateTimeFormat()
-            .resolvedOptions()
-            .timeZone
-          ||
-          'Asia/Jakarta'
-        );
-
-      } catch (error) {
-
-        return 'Asia/Jakarta';
-      }
-    }
-
-
-
-    /* ========================================================
-       API
-       ======================================================== */
-
-    async function apiCall(
-      action,
-      payload
-    ) {
-
-      if (
-        !googleCredential
-      ) {
-
-        throw new Error(
-          'Sesi Google tidak tersedia. Silakan login kembali.'
-        );
-      }
-
-
-      const response =
-        await fetch(
-          BACKEND_URL,
-          {
-
-            method:
-              'POST',
-
-            headers: {
-
-              'Content-Type':
-                'text/plain;charset=utf-8'
-            },
-
-            body:
-              JSON.stringify(
-                {
-
-                  action:
-                    action,
-
-                  auth: {
-
-                    credential:
-                      googleCredential
-                  },
-
-                  payload:
-                    payload || {}
-                }
-              )
-          }
-        );
-
-
-      const text =
-        await response.text();
-
-
-      let data;
-
-
-      try {
-
-        data =
-          JSON.parse(
-            text
-          );
-
-      } catch (error) {
-
-        throw new Error(
-          'Response backend bukan JSON yang valid.'
-        );
-      }
-
-
-      if (
-        data.ok !== true
-      ) {
-
-        const code =
-          data.error
-            ? data.error.code
-            : 'ERROR';
-
-
-        if (
-          code ===
-          'UNAUTHORIZED'
-        ) {
-
-          sessionStorage.removeItem(
-            'dawaam_google_credential'
-          );
-
-
-          googleCredential =
-            '';
-        }
-
-
-        throw new Error(
-          data.error
-            ? data.error.message
-            : 'Backend menolak request.'
-        );
-      }
-
-
-      return data.data;
-    }
-
-
-
-    /* ========================================================
-       GOOGLE LOGIN
-       ======================================================== */
-
-    async function googleLoginSuccess(
-      response
-    ) {
-
-      try {
-
-        if (
-          !response ||
-          !response.credential
-        ) {
-
-          throw new Error(
-            'Google tidak memberikan credential.'
-          );
-        }
-
-
-        googleCredential =
-          response.credential;
-
-
-        sessionStorage.setItem(
-          'dawaam_google_credential',
-          googleCredential
-        );
-
-
-        setStatus(
-          'loginStatus',
-          'Login Google berhasil. Membuka Dawaam...',
-          'success'
-        );
-
-
-        await bootstrapDawaam();
-
-
-      } catch (error) {
-
-        setStatus(
-          'loginStatus',
-          'Gagal: ' +
-          error.message,
-          'error'
-        );
-      }
-    }
-
-
-
-    function renderGoogleLogin() {
-
-      google.accounts.id.initialize(
-        {
-
-          client_id:
-            GOOGLE_CLIENT_ID,
-
-          callback:
-            googleLoginSuccess,
-
-          ux_mode:
-            'popup'
-        }
-      );
-
-
-      google.accounts.id.renderButton(
-
-        document.getElementById(
-          'googleButton'
-        ),
-
-        {
-
-          theme:
-            'outline',
-
-          size:
-            'large',
-
-          shape:
-            'pill',
-
-          text:
-            'signin_with',
-
-          width:
-            300
-        }
-      );
-
-
-      setStatus(
-        'loginStatus',
-        'Silakan masuk dengan Google.'
-      );
-    }
-
-
-
-    /* ========================================================
-       BOOTSTRAP
-       ======================================================== */
-
-    async function bootstrapDawaam() {
-
-      const data =
-        await apiCall(
-          'bootstrap',
-          {}
-        );
-
-
-      currentUser =
-        data.user;
-
-
-      const route =
-        data.route;
-
-
-      if (
-        route ===
-        '/onboarding/profile'
-      ) {
-
-        bukaProfile(
-          data
-        );
-
-        return;
-      }
-
-
-      if (
-        route ===
-        '/onboarding/program'
-      ) {
-
-        showOnly(
-          'profileSuccessScreen'
-        );
-
-
-        document
-          .getElementById(
-            'nextRoute'
-          )
-          .textContent =
-            '/onboarding/program';
-
-
-        return;
-      }
-
-
-      if (
-        route === '/today'
-      ) {
-
-        showOnly(
-          'profileSuccessScreen'
-        );
-
-
-        document
-          .getElementById(
-            'profileSuccessScreen'
-          )
-          .querySelector('h2')
-          .textContent =
-            'Akun Dawaam siap';
-
-
-        document
-          .getElementById(
-            'nextRoute'
-          )
-          .textContent =
-            '/today';
-
-
-        return;
-      }
-
-
-      bukaProfile(
-        data
-      );
-    }
-
-
-
-    /* ========================================================
-       PROFILE
-       ======================================================== */
-
-    function bukaProfile(
-      bootstrapData
-    ) {
-
-      showOnly(
-        'profileScreen'
-      );
-
-
-      const user =
-        bootstrapData.user;
-
-
-      document
-        .getElementById(
-          'profileUserName'
-        )
-        .textContent =
-          user.display_name ||
-          user.email ||
-          'Pengguna Dawaam';
-
-
-      document
-        .getElementById(
-          'timezone'
-        )
-        .value =
-          detectTimezone();
-
-
-      /**
-       * Kalau profile pernah terisi,
-       * isi kembali form.
-       */
-      const profile =
-        bootstrapData.profile;
-
-
-      if (profile) {
-
-        if (
-          profile.gender
-        ) {
-
-          const genderInput =
-            document.querySelector(
-              'input[name="gender"][value="' +
-              profile.gender +
-              '"]'
-            );
-
-
-          if (
-            genderInput
-          ) {
-
-            genderInput.checked =
-              true;
-          }
-        }
-
-
-        if (
-          profile.age_band
-        ) {
-
-          document
-            .getElementById(
-              'ageBand'
-            )
-            .value =
-              profile.age_band;
-        }
-
-
-        if (
-          profile.timezone
-        ) {
-
-          document
-            .getElementById(
-              'timezone'
-            )
-            .value =
-              profile.timezone;
-        }
-
-
-        if (
-          profile.prayer_city
-        ) {
-
-          document
-            .getElementById(
-              'prayerCity'
-            )
-            .value =
-              profile.prayer_city;
-        }
-
-
-        if (
-          profile.program_style
-        ) {
-
-          document
-            .getElementById(
-              'programStyle'
-            )
-            .value =
-              profile.program_style;
-        }
-      }
-    }
-
-
-
-    async function simpanProfil(
-      event
-    ) {
-
-      event.preventDefault();
-
-
-      const button =
-        document.getElementById(
-          'saveProfileButton'
-        );
-
-
-      button.disabled =
-        true;
-
-
-      button.textContent =
-        'Menyimpan...';
-
-
-      try {
-
-        const genderInput =
-          document.querySelector(
-            'input[name="gender"]:checked'
-          );
-
-
-        if (
-          !genderInput
-        ) {
-
-          throw new Error(
-            'Silakan pilih gender.'
-          );
-        }
-
-
-        const payload = {
-
-          gender:
-            genderInput.value,
-
-          age_band:
-            document
-              .getElementById(
-                'ageBand'
-              )
-              .value,
-
-          timezone:
-            document
-              .getElementById(
-                'timezone'
-              )
-              .value,
-
-          language:
-            'id',
-
-          program_style:
-            document
-              .getElementById(
-                'programStyle'
-              )
-              .value,
-
-          current_mode:
-            'NORMAL',
-
-          prayer_location_mode:
-            'CITY',
-
-          prayer_city:
-            document
-              .getElementById(
-                'prayerCity'
-              )
-              .value
-              .trim(),
-
-          fiqh_preferences: {
-
-            configurable:
-              true
+          auth:{
+            credential:googleCredential
           },
 
-          privacy_settings: {
-
-            store_donation_amount:
-              false
-          },
-
-          notification_settings: {
-
-            enabled:
-              true
-          }
-        };
-
-
-        await apiCall(
-          'saveProfile',
-          payload
-        );
-
-
-        /**
-         * Bootstrap ulang agar backend
-         * menentukan route berikutnya.
-         */
-        const after =
-          await apiCall(
-            'bootstrap',
-            {}
-          );
-
-
-        if (
-          after.route !==
-          '/onboarding/program' &&
-          after.route !==
-          '/today'
-        ) {
-
-          throw new Error(
-            'Profil tersimpan tetapi route berikutnya belum sesuai.'
-          );
-        }
-
-
-        showOnly(
-          'profileSuccessScreen'
-        );
-
-
-        document
-          .getElementById(
-            'nextRoute'
-          )
-          .textContent =
-            after.route;
-
-
-      } catch (error) {
-
-        setStatus(
-          'profileStatus',
-          'Gagal menyimpan: ' +
-          error.message,
-          'error'
-        );
-
-
-      } finally {
-
-        button.disabled =
-          false;
-
-
-        button.textContent =
-          'Simpan & Lanjut';
+          payload:payload || {}
+        })
       }
-    }
+    );
 
 
-
-    /* ========================================================
-       PROGRAM PLACEHOLDER
-       ======================================================== */
-
-    function lanjutProgram() {
-
-      alert(
-        'Profil sudah selesai ✅\n\n' +
-        'Tahap berikutnya kita akan membangun layar Pilih Amaliyah.'
-      );
-    }
+  const text =
+    await response.text();
 
 
+  let data;
 
-    /* ========================================================
-       LOGOUT
-       ======================================================== */
+  try{
 
-    function logoutDawaam() {
+    data=JSON.parse(text);
+
+  }catch(e){
+
+    throw new Error(
+      'Response backend tidak valid.'
+    );
+  }
+
+
+  if(data.ok !== true){
+
+    if(
+      data.error &&
+      data.error.code === 'UNAUTHORIZED'
+    ){
+
+      googleCredential='';
 
       sessionStorage.removeItem(
         'dawaam_google_credential'
       );
+    }
 
 
-      googleCredential =
-        '';
+    throw new Error(
+      data.error
+        ? data.error.message
+        : 'Request gagal.'
+    );
+  }
 
 
-      currentUser =
-        null;
+  return data.data;
+}
 
 
-      if (
-        window.google &&
-        google.accounts &&
-        google.accounts.id
-      ) {
+/* =========================
+   GOOGLE LOGIN
+   ========================= */
 
-        google.accounts.id.disableAutoSelect();
-      }
+async function googleLoginSuccess(response){
+
+  try{
+
+    googleCredential =
+      response.credential;
 
 
-      showOnly(
-        'loginScreen'
+    sessionStorage.setItem(
+      'dawaam_google_credential',
+      googleCredential
+    );
+
+
+    setStatus(
+      'loginStatus',
+      'Login berhasil. Membuka Dawaam...',
+      'success'
+    );
+
+
+    await bootstrapDawaam();
+
+
+  }catch(error){
+
+    setStatus(
+      'loginStatus',
+      'Gagal: ' + error.message,
+      'error'
+    );
+  }
+}
+
+
+function renderGoogleLogin(){
+
+  google.accounts.id.initialize({
+    client_id:GOOGLE_CLIENT_ID,
+    callback:googleLoginSuccess,
+    ux_mode:'popup'
+  });
+
+
+  google.accounts.id.renderButton(
+    document.getElementById('googleButton'),
+    {
+      theme:'outline',
+      size:'large',
+      shape:'pill',
+      text:'signin_with',
+      width:300
+    }
+  );
+
+
+  setStatus(
+    'loginStatus',
+    'Silakan masuk dengan Google.'
+  );
+}
+
+
+/* =========================
+   BOOTSTRAP
+   ========================= */
+
+async function bootstrapDawaam(){
+
+  const data =
+    await apiCall(
+      'bootstrap',
+      {}
+    );
+
+
+  currentUser =
+    data.user;
+
+
+  if(
+    data.route ===
+    '/onboarding/profile'
+  ){
+
+    bukaProfile(data);
+
+    return;
+  }
+
+
+  if(
+    data.route ===
+    '/onboarding/program'
+  ){
+
+    await bukaProgram();
+
+    return;
+  }
+
+
+  if(
+    data.route ===
+    '/today'
+  ){
+
+    tampilkanProgramSelesai(
+      data.program
+    );
+
+    return;
+  }
+
+
+  bukaProfile(data);
+}
+
+
+/* =========================
+   PROFILE
+   ========================= */
+
+function bukaProfile(data){
+
+  showOnly('profileScreen');
+
+
+  document
+    .getElementById(
+      'profileUserName'
+    )
+    .textContent =
+      data.user.display_name ||
+      data.user.email ||
+      'Pengguna Dawaam';
+
+
+  document
+    .getElementById(
+      'timezone'
+    )
+    .value =
+      detectTimezone();
+
+
+  const profile =
+    data.profile;
+
+
+  if(!profile){
+    return;
+  }
+
+
+  if(profile.gender){
+
+    const radio =
+      document.querySelector(
+        'input[name="gender"][value="' +
+        profile.gender +
+        '"]'
+      );
+
+    if(radio){
+      radio.checked=true;
+    }
+  }
+
+
+  if(profile.age_band){
+    document.getElementById('ageBand').value=profile.age_band;
+  }
+
+  if(profile.timezone){
+    document.getElementById('timezone').value=profile.timezone;
+  }
+
+  if(profile.prayer_city){
+    document.getElementById('prayerCity').value=profile.prayer_city;
+  }
+
+  if(profile.program_style){
+    document.getElementById('programStyle').value=profile.program_style;
+  }
+}
+
+
+async function simpanProfil(event){
+
+  event.preventDefault();
+
+
+  const button =
+    document.getElementById(
+      'saveProfileButton'
+    );
+
+
+  button.disabled=true;
+  button.textContent='Menyimpan...';
+
+
+  try{
+
+    const gender =
+      document.querySelector(
+        'input[name="gender"]:checked'
       );
 
 
-      setStatus(
-        'loginStatus',
-        'Silakan masuk kembali dengan Google.'
+    if(!gender){
+
+      throw new Error(
+        'Pilih gender terlebih dahulu.'
       );
     }
 
 
+    await apiCall(
+      'saveProfile',
+      {
+        gender:gender.value,
 
-    /* ========================================================
-       START APP
-       ======================================================== */
+        age_band:
+          document
+            .getElementById('ageBand')
+            .value,
 
-    window.onload =
-      async function() {
+        timezone:
+          document
+            .getElementById('timezone')
+            .value,
 
-        /**
-         * Pastikan config sudah diisi.
-         */
-        if (
-          GOOGLE_CLIENT_ID.indexOf(
-            'ISI_'
-          ) === 0 ||
-          BACKEND_URL.indexOf(
-            'ISI_'
-          ) === 0
-        ) {
+        language:'id',
 
-          setStatus(
-            'loginStatus',
-            'Google Client ID atau Backend URL belum diisi.',
-            'error'
+        program_style:
+          document
+            .getElementById('programStyle')
+            .value,
+
+        current_mode:'NORMAL',
+
+        prayer_location_mode:'CITY',
+
+        prayer_city:
+          document
+            .getElementById('prayerCity')
+            .value
+            .trim(),
+
+        fiqh_preferences:{
+          configurable:true
+        },
+
+        privacy_settings:{
+          store_donation_amount:false
+        },
+
+        notification_settings:{
+          enabled:true
+        }
+      }
+    );
+
+
+    const after =
+      await apiCall(
+        'bootstrap',
+        {}
+      );
+
+
+    if(
+      after.route !==
+      '/onboarding/program'
+    ){
+
+      throw new Error(
+        'Route program belum tersedia.'
+      );
+    }
+
+
+    showOnly(
+      'profileSuccessScreen'
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      'profileStatus',
+      'Gagal: ' + error.message,
+      'error'
+    );
+
+
+  }finally{
+
+    button.disabled=false;
+    button.textContent='Simpan & Lanjut';
+  }
+}
+
+
+/* =========================
+   PROGRAM
+   ========================= */
+
+async function bukaProgram(){
+
+  showOnly(
+    'programScreen'
+  );
+
+
+  document
+    .getElementById(
+      'programLoading'
+    )
+    .classList.remove(
+      'hidden'
+    );
+
+
+  document
+    .getElementById(
+      'optionalList'
+    )
+    .innerHTML='';
+
+
+  try{
+
+    masterAmaliyah =
+      await apiCall(
+        'getMasterAmaliyah',
+        {}
+      );
+
+
+    renderProgram();
+
+
+  }catch(error){
+
+    setStatus(
+      'programStatus',
+      'Gagal memuat amaliyah: ' +
+      error.message,
+      'error'
+    );
+
+  }finally{
+
+    document
+      .getElementById(
+        'programLoading'
+      )
+      .classList.add(
+        'hidden'
+      );
+  }
+}
+
+
+function renderProgram(){
+
+  const core =
+    masterAmaliyah.filter(
+      function(item){
+        return item.is_core === true;
+      }
+    );
+
+
+  const optional =
+    masterAmaliyah.filter(
+      function(item){
+        return item.is_core !== true;
+      }
+    );
+
+
+  const coreList =
+    document.getElementById(
+      'coreList'
+    );
+
+
+  coreList.innerHTML='';
+
+
+  core.forEach(
+    function(item){
+
+      const pill =
+        document.createElement(
+          'span'
+        );
+
+      pill.className =
+        'core-pill';
+
+      pill.textContent =
+        item.short_name ||
+        item.name;
+
+      coreList.appendChild(
+        pill
+      );
+    }
+  );
+
+
+  const grouped={};
+
+
+  optional.forEach(
+    function(item){
+
+      const category =
+        item.category ||
+        'LAINNYA';
+
+      if(!grouped[category]){
+        grouped[category]=[];
+      }
+
+      grouped[category].push(item);
+    }
+  );
+
+
+  const container =
+    document.getElementById(
+      'optionalList'
+    );
+
+
+  container.innerHTML='';
+
+
+  Object.keys(grouped)
+    .forEach(
+      function(category){
+
+        const heading =
+          document.createElement(
+            'div'
           );
 
-          return;
+        heading.className='category';
+
+        heading.textContent =
+          formatCategory(category);
+
+        container.appendChild(
+          heading
+        );
+
+
+        grouped[category]
+          .forEach(
+            function(item){
+
+              container.appendChild(
+                buildAmaliyahCard(item)
+              );
+            }
+          );
+      }
+    );
+
+
+  updateSelectedCount();
+}
+
+
+function formatCategory(value){
+
+  return String(value)
+    .replaceAll('_',' ');
+}
+
+
+function buildAmaliyahCard(item){
+
+  const card =
+    document.createElement(
+      'div'
+    );
+
+
+  card.className =
+    'amal-card';
+
+  card.dataset.id =
+    item.amaliyah_id;
+
+
+  const main =
+    document.createElement(
+      'label'
+    );
+
+
+  main.className =
+    'amal-main';
+
+
+  const checkbox =
+    document.createElement(
+      'input'
+    );
+
+
+  checkbox.type =
+    'checkbox';
+
+  checkbox.className =
+    'amal-check';
+
+  checkbox.dataset.id =
+    item.amaliyah_id;
+
+
+  checkbox.addEventListener(
+    'change',
+    function(){
+
+      card.classList.toggle(
+        'selected',
+        checkbox.checked
+      );
+
+      updateSelectedCount();
+    }
+  );
+
+
+  const info =
+    document.createElement(
+      'div'
+    );
+
+
+  info.className =
+    'amal-info';
+
+
+  const name =
+    document.createElement(
+      'div'
+    );
+
+
+  name.className =
+    'amal-name';
+
+  name.textContent =
+    item.name;
+
+
+  const meta =
+    document.createElement(
+      'div'
+    );
+
+
+  meta.className =
+    'amal-meta';
+
+
+  meta.textContent =
+    buildMetaText(item);
+
+
+  info.appendChild(name);
+  info.appendChild(meta);
+
+  main.appendChild(checkbox);
+  main.appendChild(info);
+
+  card.appendChild(main);
+
+
+  const settings =
+    buildAmaliyahSettings(
+      item
+    );
+
+
+  card.appendChild(settings);
+
+
+  return card;
+}
+
+
+function buildMetaText(item){
+
+  const parts=[];
+
+
+  if(item.default_target !== '' &&
+     item.default_target !== null &&
+     item.default_target !== undefined){
+
+    parts.push(
+      'Target awal: ' +
+      formatTarget(
+        item.default_target,
+        item.target_unit
+      )
+    );
+  }
+
+
+  if(item.frequency_type){
+
+    parts.push(
+      formatCategory(
+        item.frequency_type
+      )
+    );
+  }
+
+
+  return parts.join(' · ');
+}
+
+
+function buildAmaliyahSettings(item){
+
+  const box =
+    document.createElement(
+      'div'
+    );
+
+
+  box.className =
+    'amal-settings';
+
+
+  const allowed =
+    Array.isArray(
+      item.allowed_targets
+    )
+      ? item.allowed_targets
+      : [];
+
+
+  if(allowed.length > 0){
+
+    const select =
+      document.createElement(
+        'select'
+      );
+
+
+    select.className =
+      'target-select';
+
+
+    allowed.forEach(
+      function(option){
+
+        let value;
+        let unit;
+
+
+        if(
+          typeof option ===
+          'object' &&
+          option !== null
+        ){
+
+          value =
+            option.value;
+
+          unit =
+            option.unit ||
+            item.target_unit;
+
+        }else{
+
+          value =
+            option;
+
+          unit =
+            item.target_unit;
         }
 
 
-        /**
-         * Kalau token masih ada dalam sesi browser,
-         * coba masuk tanpa login ulang.
-         */
-        if (
-          googleCredential
-        ) {
-
-          try {
-
-            await bootstrapDawaam();
-
-            return;
-
-          } catch (error) {
-
-            googleCredential =
-              '';
+        const el =
+          document.createElement(
+            'option'
+          );
 
 
-            sessionStorage.removeItem(
-              'dawaam_google_credential'
-            );
+        el.value =
+          String(value);
+
+
+        el.dataset.unit =
+          unit || '';
+
+
+        el.textContent =
+          formatTarget(
+            value,
+            unit
+          );
+
+
+        if(
+          String(value) ===
+          String(
+            item.default_target
+          )
+        ){
+
+          el.selected=true;
+        }
+
+
+        select.appendChild(
+          el
+        );
+      }
+    );
+
+
+    box.appendChild(select);
+  }
+
+
+  if(
+    String(
+      item.frequency_type
+    ).toUpperCase()
+      === 'WEEKLY_CUSTOM'
+  ){
+
+    const dayBox =
+      document.createElement(
+        'div'
+      );
+
+
+    dayBox.className =
+      'days';
+
+
+    dayBox.innerHTML = `
+
+      <label class="day-check">
+        <input
+          type="checkbox"
+          value="MON"
+          checked
+        >
+        <span>Senin</span>
+      </label>
+
+      <label class="day-check">
+        <input
+          type="checkbox"
+          value="THU"
+          checked
+        >
+        <span>Kamis</span>
+      </label>
+    `;
+
+
+    box.appendChild(
+      dayBox
+    );
+  }
+
+
+  return box;
+}
+
+
+function formatTarget(value,unit){
+
+  const u =
+    String(unit || '')
+      .toUpperCase();
+
+
+  if(u === 'RAKAAT'){
+    return value + ' rakaat';
+  }
+
+
+  if(u === 'JUZ'){
+
+    if(Number(value) === .25){
+      return '¼ juz';
+    }
+
+    if(Number(value) === .5){
+      return '½ juz';
+    }
+
+    return value + ' juz';
+  }
+
+
+  if(u === 'AYAT'){
+    return value + ' ayat';
+  }
+
+
+  if(u === 'MINUTE'){
+    return value + ' menit';
+  }
+
+
+  if(u === 'IDR'){
+    return 'Rp ' +
+      Number(value)
+        .toLocaleString('id-ID');
+  }
+
+
+  if(u === 'EVENT'){
+    return '1 kali';
+  }
+
+
+  return (
+    value +
+    (
+      unit
+        ? ' ' + unit
+        : ''
+    )
+  );
+}
+
+
+function updateSelectedCount(){
+
+  const count =
+    document.querySelectorAll(
+      '.amal-check:checked'
+    ).length;
+
+
+  document
+    .getElementById(
+      'selectedCount'
+    )
+    .textContent =
+      count;
+}
+
+
+function smartValue(value){
+
+  if(
+    value !== '' &&
+    !isNaN(Number(value))
+  ){
+
+    return Number(value);
+  }
+
+
+  return value;
+}
+
+
+async function simpanProgram(){
+
+  const button =
+    document.getElementById(
+      'saveProgramButton'
+    );
+
+
+  button.disabled=true;
+
+  button.textContent=
+    'Menyimpan program...';
+
+
+  try{
+
+    const core =
+      masterAmaliyah.filter(
+        function(item){
+          return item.is_core === true;
+        }
+      );
+
+
+    /*
+     * Lima shalat fardhu
+     * selalu disimpan.
+     */
+    for(
+      const item of core
+    ){
+
+      await apiCall(
+        'saveUserAmaliyah',
+        {
+          amaliyah_id:
+            item.amaliyah_id
+        }
+      );
+    }
+
+
+    const selected =
+      Array.from(
+        document.querySelectorAll(
+          '.amal-check:checked'
+        )
+      );
+
+
+    /*
+     * Core-only tetap boleh.
+     * User tidak dipaksa memilih banyak.
+     */
+    for(
+      const check of selected
+    ){
+
+      const id =
+        check.dataset.id;
+
+
+      const master =
+        masterAmaliyah.find(
+          function(item){
+            return item.amaliyah_id === id;
           }
-        }
+        );
 
 
-        renderGoogleLogin();
+      const card =
+        check.closest(
+          '.amal-card'
+        );
+
+
+      const payload={
+        amaliyah_id:id
       };
 
-  </script>
+
+      const targetSelect =
+        card.querySelector(
+          '.target-select'
+        );
+
+
+      if(targetSelect){
+
+        const option =
+          targetSelect.options[
+            targetSelect.selectedIndex
+          ];
+
+
+        payload.target_value =
+          smartValue(
+            targetSelect.value
+          );
+
+
+        payload.target_unit =
+          option.dataset.unit ||
+          master.target_unit;
+      }
+
+
+      if(
+        String(
+          master.frequency_type
+        ).toUpperCase()
+          === 'WEEKLY_CUSTOM'
+      ){
+
+        const days =
+          Array.from(
+            card.querySelectorAll(
+              '.day-check input:checked'
+            )
+          ).map(
+            function(day){
+              return day.value;
+            }
+          );
+
+
+        if(days.length === 0){
+
+          throw new Error(
+            master.name +
+            ': pilih minimal satu hari.'
+          );
+        }
+
+
+        payload.frequency_rule={
+          type:'WEEKLY_CUSTOM',
+          days:days
+        };
+      }
+
+
+      await apiCall(
+        'saveUserAmaliyah',
+        payload
+      );
+    }
+
+
+    const after =
+      await apiCall(
+        'bootstrap',
+        {}
+      );
+
+
+    if(
+      after.route !==
+      '/today'
+    ){
+
+      throw new Error(
+        'Program tersimpan tetapi onboarding belum READY.'
+      );
+    }
+
+
+    tampilkanProgramSelesai(
+      after.program
+    );
+
+
+  }catch(error){
+
+    setStatus(
+      'programStatus',
+      'Gagal menyimpan program: ' +
+      error.message,
+      'error'
+    );
+
+
+  }finally{
+
+    button.disabled=false;
+
+    button.textContent=
+      'Simpan Program Dawaam';
+  }
+}
+
+
+function tampilkanProgramSelesai(program){
+
+  showOnly(
+    'programSuccessScreen'
+  );
+
+
+  if(program){
+
+    document
+      .getElementById(
+        'finalLevel'
+      )
+      .textContent =
+        program.level
+          ? program.level.label
+          : 'Program Dawaam';
+
+
+    document
+      .getElementById(
+        'finalPoints'
+      )
+      .textContent =
+        (
+          program.program_points ||
+          0
+        ) +
+        ' poin program';
+  }
+}
+
+
+/* =========================
+   DASHBOARD NEXT
+   ========================= */
+
+function bukaDashboardPlaceholder(){
+
+  alert(
+    'Program sudah siap ✅\n\n' +
+    'Tahap berikutnya kita akan membangun Dashboard Hari Ini.'
+  );
+}
+
+
+/* =========================
+   LOGOUT
+   ========================= */
+
+function logoutDawaam(){
+
+  sessionStorage.removeItem(
+    'dawaam_google_credential'
+  );
+
+
+  googleCredential='';
+  currentUser=null;
+
+
+  if(
+    window.google &&
+    google.accounts &&
+    google.accounts.id
+  ){
+
+    google.accounts.id.disableAutoSelect();
+  }
+
+
+  showOnly(
+    'loginScreen'
+  );
+
+
+  setStatus(
+    'loginStatus',
+    'Silakan masuk kembali dengan Google.'
+  );
+}
+
+
+/* =========================
+   START
+   ========================= */
+
+window.onload =
+  async function(){
+
+
+    if(
+      GOOGLE_CLIENT_ID.startsWith(
+        'GANTI_'
+      ) ||
+      BACKEND_URL.startsWith(
+        'GANTI_'
+      )
+    ){
+
+      setStatus(
+        'loginStatus',
+        'Client ID atau Backend URL belum diisi.',
+        'error'
+      );
+
+      return;
+    }
+
+
+    if(googleCredential){
+
+      try{
+
+        await bootstrapDawaam();
+
+        return;
+
+      }catch(error){
+
+        googleCredential='';
+
+        sessionStorage.removeItem(
+          'dawaam_google_credential'
+        );
+      }
+    }
+
+
+    renderGoogleLogin();
+  };
+
+</script>
 
 </body>
 </html>
