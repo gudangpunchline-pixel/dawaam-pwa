@@ -5710,5 +5710,131 @@ renderConditionPanel =
   };
 
 </script>
+  <script>
+
+/* =========================================================
+   CONDITION CONTROL FIX
+   Tidak lagi bergantung pada condition_id di localStorage.
+   ========================================================= */
+
+setDawaamCondition =
+  async function(type) {
+
+    disableConditionButtons(
+      true
+    );
+
+
+    try {
+
+      /*
+       * Selalu bersihkan kondisi aktif user
+       * langsung di backend.
+       */
+      await apiCall(
+        'endCondition',
+        {
+          condition_id:
+            'ACTIVE'
+        }
+      );
+
+
+      clearStoredCondition();
+
+
+      /*
+       * NORMAL berarti cukup selesai di sini.
+       *
+       * Mode Normal / Minimum TIDAK disentuh.
+       * Itu fitur yang berbeda.
+       */
+      if (
+        type === 'NORMAL'
+      ) {
+
+        await loadToday();
+
+
+        setStatus(
+          'dashboardStatus',
+          'Kondisi kembali Normal.',
+          'success'
+        );
+
+
+        return;
+      }
+
+
+      /*
+       * Label UI = SAFAR
+       * Enum backend = TRAVEL
+       */
+      const backendType =
+        type === 'SAFAR'
+          ? 'TRAVEL'
+          : type;
+
+
+      await apiCall(
+        'startCondition',
+        {
+
+          condition_type:
+            backendType,
+
+          source:
+            'MANUAL'
+        }
+      );
+
+
+      /*
+       * Cukup simpan tipe untuk UI.
+       * Kita tidak membutuhkan condition_id lagi.
+       */
+      storeCondition(
+        '',
+        type
+      );
+
+
+      await loadToday();
+
+
+      setStatus(
+        'dashboardStatus',
+        'Kondisi ' +
+        formatConditionName(
+          type
+        ) +
+        ' aktif.',
+        'success'
+      );
+
+
+    } catch (error) {
+
+      setStatus(
+        'dashboardStatus',
+        'Gagal mengubah kondisi: ' +
+        error.message,
+        'error'
+      );
+
+
+    } finally {
+
+      disableConditionButtons(
+        false
+      );
+
+
+      renderConditionPanel();
+    }
+  };
+
+</script>
 </body>
 </html>
